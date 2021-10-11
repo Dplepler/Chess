@@ -3,6 +3,8 @@
 
 #include "piece.h"
 
+class Piece;
+
 class Bishop: public Piece
 {
 

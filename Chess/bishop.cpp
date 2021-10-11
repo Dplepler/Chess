@@ -2,7 +2,7 @@
 
 Bishop::Bishop(Line line, Column column) : Piece(line, column)
 {
-	this->id = ID_BISHOP;
+	this->id = ID::ID_BISHOP;
 
 }
 
@@ -10,6 +10,6 @@ Bishop::Bishop(Line line, Column column) : Piece(line, column)
 bool Bishop::checkMove(Line line, Column column)
 {
 
-
+	return true;
 }
 

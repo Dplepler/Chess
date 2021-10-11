@@ -2,11 +2,11 @@
 
 Pawn::Pawn(Line line, Column column) : Piece(line, column)
 {
-	this->id = ID_PAWN;
+	this->id = ID::ID_PAWN;
 }
 
 bool Pawn::checkMove(Line line, Column column)
 {
 
-
+	return true;
 }

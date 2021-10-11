@@ -1,12 +1,14 @@
 #ifndef PIECE_CLASS_H
 #define PIECE_CLASS_H
 
-#include "pawn.h"
-#include "rook.h"
-#include "knight.h"
-#include "bishop.h"
-#include "queen.h"
-#include "king.h"
+#include <vector>
+
+class Rook;
+class Queen;
+class King;
+class Knight;
+class Bishop;
+class Pawn;
 
 enum class Line
 {
@@ -42,7 +44,7 @@ public:
 
 	
 
-	enum id_T
+	enum class ID
 	{
 		ID_PAWN,
 		ID_ROOK,
@@ -56,6 +58,10 @@ public:
 
 
 	Piece(Line line, Column column);
+
+	static const char* idToString(ID id);
+	static Line intToLine(unsigned int line);
+	static Column intToColumn(unsigned int column);
 	virtual bool checkMove(Line line, Column column) = 0;
 	
 protected:
@@ -63,7 +69,9 @@ protected:
 	Line line;
 	Column column;
 
+private:
 
+	
 
 };
 
