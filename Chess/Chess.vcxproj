@@ -145,6 +145,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pawn.cpp" />
     <ClCompile Include="piece.cpp" />
+    <ClCompile Include="play.cpp" />
     <ClCompile Include="queen.cpp" />
     <ClCompile Include="rook.cpp" />
   </ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="knight.h" />
     <ClInclude Include="pawn.h" />
     <ClInclude Include="piece.h" />
+    <ClInclude Include="play.h" />
     <ClInclude Include="queen.h" />
     <ClInclude Include="rook.h" />
   </ItemGroup>

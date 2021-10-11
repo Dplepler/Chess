@@ -10,12 +10,12 @@ class Queen : public Piece
 
 public:
 	// C'tor
-	Queen(Line line, Column column);
+	Queen(unsigned int line, unsigned int column, bool color);
 
 
 private:
 
-	virtual bool checkMove(Line line, Column column);
+	virtual bool checkMove(unsigned int line, unsigned int column);
 
 
 };

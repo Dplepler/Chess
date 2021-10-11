@@ -1,11 +1,11 @@
 #include "knight.h"
 
-Knight::Knight(Line line, Column column) : Piece(line, column)
+Knight::Knight(unsigned int line, unsigned int column, bool color) : Piece(line, column, color)
 {
 	this->id = ID::ID_KNIGHT;
 }
 
-bool Knight::checkMove(Line line, Column column)
+bool Knight::checkMove(unsigned int line, unsigned int column)
 {
 
 	return true;

@@ -5,16 +5,20 @@
 int main(void)
 {
 	unsigned int i = 0;
+	unsigned int i2 = 0;
+
 
 	Board* board = new Board();
-	size_t size = board->board.size();
 
-	for (i = 0; i < size; i++)
+	for (i = 0; i < BOARD_HEIGHT; i++)
 	{
-		if (board->board[i])
-			std::cout << Piece::idToString(board->board[i]->id) << "\n";
-		else
-			std::cout << "Empty\n";
+		for (i2 = 0; i2 < BOARD_WIDTH; i2++)
+		{
+			if (board->board[i][i2])
+				std::cout << Piece::idToString(board->board[i][i2]->id) << "\n";
+			else
+				std::cout << "Empty\n";
+		}
 	}
 
 

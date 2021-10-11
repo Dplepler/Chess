@@ -1,11 +1,11 @@
 #include "queen.h"
 
-Queen::Queen(Line line, Column column) : Piece(line, column)
+Queen::Queen(unsigned int line, unsigned int column, bool color) : Piece(line, column, color)
 {
 	this->id = ID::ID_QUEEN;
 }
 
-bool Queen::checkMove(Line line, Column column)
+bool Queen::checkMove(unsigned int line, unsigned int column)
 {
 
 	return true;

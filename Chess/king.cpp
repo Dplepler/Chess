@@ -1,11 +1,11 @@
 #include "king.h"
 
-King::King(Line line, Column column) : Piece(line, column)
+King::King(unsigned int line, unsigned int column, bool color) : Piece(line, column, color)
 {
 	this->id = ID::ID_KING;
 }
 
-bool King::checkMove(Line line, Column column)
+bool King::checkMove(unsigned int line, unsigned int column)
 {
 
 	return true;

@@ -10,12 +10,12 @@ class Bishop: public Piece
 
 public:
 	// C'tor
-	Bishop(Line line, Column column);
+	Bishop(unsigned int line, unsigned int column, bool color);
 
 
 private:
 
-	virtual bool checkMove(Line line, Column column);
+	virtual bool checkMove(unsigned int line, unsigned int column);
 
 
 };

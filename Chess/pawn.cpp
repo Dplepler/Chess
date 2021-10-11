@@ -1,11 +1,11 @@
 #include "pawn.h"
 
-Pawn::Pawn(Line line, Column column) : Piece(line, column)
+Pawn::Pawn(unsigned int line, unsigned int column, bool color) : Piece(line, column, color)
 {
 	this->id = ID::ID_PAWN;
 }
 
-bool Pawn::checkMove(Line line, Column column)
+bool Pawn::checkMove(unsigned int line, unsigned int column)
 {
 
 	return true;

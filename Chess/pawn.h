@@ -10,12 +10,12 @@ class Pawn : public Piece
 
 public:
 	// C'tor
-	Pawn(Line line, Column column);
+	Pawn(unsigned int line, unsigned int column, bool color);
 
 
 private:
 
-	virtual bool checkMove(Line line, Column column);
+	virtual bool checkMove(unsigned int line, unsigned int column);
 
 
 };
