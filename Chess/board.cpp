@@ -22,9 +22,11 @@ Board::Board()
 
 	for (i = 0; i < BOARD_HEIGHT; i++)
 	{
+		// After two lines, switch to the black pieces
+		if (color == WHITE && i > TWICE)
+			color = BLACK;
 
-		if (!color && i > TWICE)
-			color = true;
+		this->board.push_back(std::vector<Piece*>());
 
 		for (i2 = 0; i2 < BOARD_WIDTH; i2++)
 		{
@@ -48,15 +50,15 @@ Board::Board()
 
 }
 
-void Board::updateBoard(Piece* srcPiece, Piece* dstPiece)
+void Board::updateBoard(unsigned int line, unsigned int col, Piece* piece)
 {
-
-
-
+	this->board[piece->line][piece->column] = nullptr;
+	this->board[line][col] = piece;
 }
 
 Piece* Board::getPiece(unsigned int line, unsigned int col)
 {
+	Piece* piece = nullptr;
 
 	if (line > BOARD_HEIGHT || col > BOARD_WIDTH)
 	{
@@ -64,8 +66,15 @@ Piece* Board::getPiece(unsigned int line, unsigned int col)
 		exit(1);
 	}
 
-	return this->board[line][col];
+	if (board[line][col])
+	{
+		piece = this->board[line][col];
+	}
+	else
+	{
+		std::cout << "Empty slot\n";
+	}
 
 
-
+	return piece;
 }

@@ -12,6 +12,7 @@ public:
 
 	Play();
 	bool turn;
+	bool gameOver;
 	
 	void makeMove(Board* board);
 

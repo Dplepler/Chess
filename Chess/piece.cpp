@@ -17,6 +17,12 @@ Piece::Piece(unsigned int line, unsigned int column, bool color)
 
 }
 
+void Piece::updateCoords(unsigned int line, unsigned int column)
+{
+	this->line = line;
+	this->column = column;
+}
+
 const char* Piece::idToString(ID id)
 {
 	switch (id)

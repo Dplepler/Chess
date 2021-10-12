@@ -7,5 +7,17 @@ Rook::Rook(unsigned int line, unsigned int column, bool color) : Piece(line, col
 
 bool Rook::checkMove(unsigned int line, unsigned int column)
 {
-	return true;
+	bool flag = false;
+
+	// Check for straight lines
+	if (this->line == line && this->column != column)
+	{
+		flag = true;
+	}
+	else if (this->line != line && this->column == column)
+	{
+		flag = true;
+	}
+
+	return flag;
 }

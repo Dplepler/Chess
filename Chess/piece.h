@@ -2,6 +2,11 @@
 #define PIECE_CLASS_H
 
 #include <vector>
+#include <cmath>
+
+#define WHITE 0
+#define BLACK 1
+#define TWO 2.f
 
 class Rook;
 class Queen;
@@ -16,6 +21,8 @@ class Piece
 
 public:
 
+	unsigned int line;
+	unsigned int column;
 	bool color;
 
 	enum class ID
@@ -33,13 +40,9 @@ public:
 
 	Piece(unsigned int line, unsigned int column, bool color);
 
+	void updateCoords(unsigned int line, unsigned int column);
 	static const char* idToString(ID id);
 	virtual bool checkMove(unsigned int line, unsigned int column) = 0;
-	
-protected:
-
-	unsigned int line;
-	unsigned int column;
 
 private:
 

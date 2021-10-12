@@ -1,5 +1,6 @@
 #include <iostream>
 #include "board.h"
+#include "play.h"
 
 
 int main(void)
@@ -9,16 +10,28 @@ int main(void)
 
 
 	Board* board = new Board();
+	Play* play = new Play();
 
-	for (i = 0; i < BOARD_HEIGHT; i++)
+	while (!play->gameOver)
 	{
-		for (i2 = 0; i2 < BOARD_WIDTH; i2++)
+		for (i = 0; i < BOARD_HEIGHT; i++)
 		{
-			if (board->board[i][i2])
-				std::cout << Piece::idToString(board->board[i][i2]->id) << "\n";
-			else
-				std::cout << "Empty\n";
+
+			for (i2 = 0; i2 < BOARD_WIDTH; i2++)
+			{
+				if (board->board[i][i2])
+					std::cout << Piece::idToString(board->board[i][i2]->id) << ", ";
+
+			}
+
+			std::cout << "\n";
 		}
+
+
+		play->makeMove(board);
+
+		
+
 	}
 
 
