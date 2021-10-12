@@ -7,7 +7,7 @@
 #include "queen.h"
 #include "king.h"
 
-Piece::Piece(unsigned int line, unsigned int column, bool color)
+Piece::Piece(int line, int column, bool color)
 {
 	this->line = line;
 	this->column = column;
@@ -17,7 +17,7 @@ Piece::Piece(unsigned int line, unsigned int column, bool color)
 
 }
 
-void Piece::updateCoords(unsigned int line, unsigned int column)
+void Piece::updateCoords(int line, int column)
 {
 	this->line = line;
 	this->column = column;

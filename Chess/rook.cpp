@@ -1,11 +1,11 @@
 #include "rook.h"
 
-Rook::Rook(unsigned int line, unsigned int column, bool color) : Piece(line, column, color)
+Rook::Rook(int line, int column, bool color) : Piece(line, column, color)
 {
 	this->id = ID::ID_ROOK;
 }
 
-bool Rook::checkMove(unsigned int line, unsigned int column)
+bool Rook::checkMove(int line, int column, Board* board)
 {
 	bool flag = false;
 

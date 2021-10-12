@@ -10,12 +10,12 @@ class Rook : public Piece
 
 public:
 	// C'tor
-	Rook(unsigned int line, unsigned int column, bool color);
+	Rook(int line, int column, bool color);
 
 
 private:
 
-	virtual bool checkMove(unsigned int line, unsigned int column);
+	virtual bool checkMove(int line, int column, Board* board);
 
 
 };

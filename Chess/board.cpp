@@ -50,23 +50,22 @@ Board::Board()
 
 }
 
-void Board::updateBoard(unsigned int line, unsigned int col, Piece* piece)
+void Board::updateBoard(int line, unsigned int col, Piece* piece)
 {
 	this->board[piece->line][piece->column] = nullptr;
 	this->board[line][col] = piece;
 }
 
-Piece* Board::getPiece(unsigned int line, unsigned int col)
+Piece* Board::getPiece(int line, unsigned int col)
 {
 	Piece* piece = nullptr;
 
-	if (line > BOARD_HEIGHT || col > BOARD_WIDTH)
+	if (line > BOARD_HEIGHT - 1 || col > BOARD_WIDTH - 1)
 	{
 		std::cout << "One or more parameters are too high\n";
-		exit(1);
 	}
 
-	if (board[line][col])
+	else if (board[line][col])
 	{
 		piece = this->board[line][col];
 	}

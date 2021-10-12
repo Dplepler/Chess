@@ -1,17 +1,17 @@
 #include "pawn.h"
 
-Pawn::Pawn(unsigned int line, unsigned int column, bool color) : Piece(line, column, color)
+Pawn::Pawn(int line, int column, bool color) : Piece(line, column, color)
 {
 	this->id = ID::ID_PAWN;
 }
 
-bool Pawn::checkMove(unsigned int line, unsigned int column)
+bool Pawn::checkMove(int line, int column, Board* board)
 {
 	bool flag = false;
 
 	// Here we don't want to use the abs function as pawns can only move forward
-	unsigned int lineMovement = line - this->line;
-	unsigned int columnMovement = column - this->column;
+	int lineMovement = line - this->line;
+	int columnMovement = column - this->column;
 
 	// For movements that skip two lines,
 	if (lineMovement == TWO)

@@ -10,12 +10,12 @@ class King : public Piece
 
 public:
 	// C'tor
-	King(unsigned int line, unsigned int column, bool color);
+	King(int line, int column, bool color);
 
 
 private:
 
-	virtual bool checkMove(unsigned int line, unsigned int column);
+	virtual bool checkMove(int line, int column, Board* board);
 
 
 };

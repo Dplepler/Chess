@@ -41,27 +41,38 @@ void Play::makeMove(Board* board)
 	
 	do
 	{
+		tryAgain = false;
+
 		std::cout << "Make a move\n" << "line and column of piece to go to (in that order): ";
 		std::cin >> line >> column;
 
 		std::cout << "\n";
 
-		if (board->board[line][column] && board->board[line][column]->color == piece->color)
-			std::cout << "You already have a piece in the desired position\n";
+		if (line > BOARD_HEIGHT - 1 || column > BOARD_WIDTH - 1)
+		{
+			std::cout << "One or more parameters are too high\n";
+			tryAgain = true;
+		}
 
-	} while (board->board[line][column] && board->board[line][column]->color == piece->color);
+		else if (board->board[line][column] && board->board[line][column]->color == piece->color)
+		{
+			std::cout << "You already have a piece in the desired position\n";
+			tryAgain = true;
+		}
+			
+
+	} while (tryAgain);
 	
 
-	if (piece->checkMove(line, column))
+	if (piece->checkMove(line, column, board))
 	{
 		board->updateBoard(line, column, piece);
 		piece->updateCoords(line, column);
+
+		this->turn = !this->turn;
 	}
 	else
 	{
-		std::cout << "Invalid move, try again\n";  
+		std::cout << "Invalid move, try again\n";
 	}
-
-	this->turn = !this->turn;
-
 }

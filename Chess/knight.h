@@ -10,12 +10,12 @@ class Knight : public Piece
 
 public:
 	// C'tor
-	Knight(unsigned int line, unsigned int column, bool color);
+	Knight(int line, int column, bool color);
 
 
 private:
 
-	virtual bool checkMove(unsigned int line, unsigned int column);
+	virtual bool checkMove(int line, int column, Board* board);
 
 
 };

@@ -32,8 +32,8 @@ public:
 
 	// C'tor
 	Board();
-	void updateBoard(unsigned int line, unsigned int col, Piece* piece);
-	Piece* getPiece(unsigned int line, unsigned int col);
+	void updateBoard(int line, unsigned int col, Piece* piece);
+	Piece* getPiece(int line, unsigned int col);
 	std::vector<std::vector<Piece*>> board;
 	
 

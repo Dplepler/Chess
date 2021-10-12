@@ -8,6 +8,7 @@
 #define BLACK 1
 #define TWO 2.f
 
+class Board;
 class Rook;
 class Queen;
 class King;
@@ -21,8 +22,8 @@ class Piece
 
 public:
 
-	unsigned int line;
-	unsigned int column;
+	int line;
+	int column;
 	bool color;
 
 	enum class ID
@@ -38,15 +39,11 @@ public:
 	} id;
 
 
-	Piece(unsigned int line, unsigned int column, bool color);
+	Piece(int line, int column, bool color);
 
-	void updateCoords(unsigned int line, unsigned int column);
+	void updateCoords(int line, int column);
 	static const char* idToString(ID id);
-	virtual bool checkMove(unsigned int line, unsigned int column) = 0;
-
-private:
-
-	
+	virtual bool checkMove(int line, int column, Board* board) = 0;	
 
 };
 
