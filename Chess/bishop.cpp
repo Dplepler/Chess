@@ -1,5 +1,7 @@
 #include "bishop.h"
 
+#include "board.h"
+
 Bishop::Bishop(int line, int column, bool color) : Piece(line, column, color)
 {
 	this->id = ID::ID_BISHOP;
@@ -10,7 +12,7 @@ bool Bishop::checkMove(int line, int column, Board* board)
 {
 	unsigned int i = 0;
 	unsigned int i2 = 0;
-	bool flag = false;
+	bool flag = true;
 
 	enum class XDIR
 	{
@@ -30,30 +32,35 @@ bool Bishop::checkMove(int line, int column, Board* board)
 	if (this->line == line || this->column == column)
 		return false;
 
-	// Check for diagonal squares
-	if (!(this->line % 2) && !(this->column % 2) || this->line % 2 && this->column % 2)
+	line > this->line ? yDir = YDIR::DOWN : yDir = YDIR::UP;
+	column > this->column ? xDir = XDIR::RIGHT : xDir = XDIR::LEFT;
+
+	yDir == YDIR::DOWN ? i = line - 1 : i = this->line - 1;
+	xDir == XDIR::RIGHT ? i2 = column - 1 : i2 = this->column - 1;
+
+	do
 	{
-		if (!(line % 2) && !(column % 2) || line % 2 && column % 2)
-		{
-			line > this->line ? yDir = YDIR::DOWN : yDir = YDIR::UP;
-			column > this->column ? xDir = XDIR::RIGHT : xDir = XDIR::LEFT;
-			flag = true;
-		}
-		else
+		if (board->board[i][i2])
 		{
 			flag = false;
 		}
-			
-	}
-	else
-	{
-		if (!(line % 2) && column % 2 || line % 2 && !(column % 2))
-			flag = true;
-		else
-			flag = false;
-	}
+
+		i--;
+		i2--;
+
+	} while ((yDir == YDIR::DOWN ? i > this->line : i > line) && (xDir == XDIR::RIGHT ? i2 > this->column : i2 > column) && flag);
 
 	
+	if (yDir == YDIR::DOWN ? i != this->line : i != line && xDir == XDIR::RIGHT ? i2 != this->column : i2 != column && flag)
+	{
+		std::cout << "Illegal move, Bishop can only move in diagonal lines\n";
+
+		flag = false;
+	}
+	else if (!flag)
+	{
+		std::cout << "Another piece is blocking the way\n";
+	}
 
 	return flag;
 }

@@ -3,6 +3,9 @@
 
 #include "piece.h"
 
+#define BLACK_PAWN_POS 6
+#define WHITE_PAWN_POS 1
+
 class Piece;
 
 class Pawn : public Piece
