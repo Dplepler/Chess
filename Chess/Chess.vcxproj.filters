@@ -51,6 +51,9 @@
     <ClCompile Include="play.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="board.h">
@@ -78,6 +81,12 @@
       <Filter>Header Files\pieces</Filter>
     </ClInclude>
     <ClInclude Include="play.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
