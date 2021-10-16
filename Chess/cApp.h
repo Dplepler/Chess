@@ -2,7 +2,11 @@
 #define CAPP_CLASS_H
 
 #include "wx/wx.h"
-#include "main.h"
+#include "wxImagePanel.h"
+#include "wx/sizer.h"
+
+#define WIDTH 950
+#define HEIGHT 739
 
 
 class cApp : public wxApp
@@ -15,7 +19,10 @@ public:
 	virtual bool OnInit();
 
 private:
-	Main* m_frame1 = nullptr;
+
+	wxFrame* m_frame1 = nullptr;
+	wxImagePanel* drawPane;
+
 
 };
 

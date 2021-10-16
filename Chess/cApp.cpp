@@ -3,13 +3,26 @@
 wxIMPLEMENT_APP(cApp);
 
 cApp::cApp() {}
-
 cApp::~cApp() {}
 
 bool cApp::OnInit()
 {
-	m_frame1 = new Main();
+
+	wxInitAllImageHandlers();
+
+	wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+	m_frame1 = new wxFrame(NULL, wxID_ANY, wxT("Plepler Chess"), wxPoint(50, 50), wxSize(WIDTH, HEIGHT));
+
+	drawPane = new wxImagePanel(m_frame1, wxT("Images/chessBoard.png"), wxBITMAP_TYPE_PNG);
+	sizer->Add(drawPane, 1, wxEXPAND);
+
+	wxImage* king = new wxImage(75, 75, "Images/King.png");
+
+
+	m_frame1->SetSizer(sizer);
+
 	m_frame1->Show();
+
 
 	return true;
 }
