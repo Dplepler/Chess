@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CAPP_CLASS_H
+#define CAPP_CLASS_H
 
 #include "wx/wx.h"
 #include "main.h"
@@ -18,3 +19,4 @@ private:
 
 };
 
+#endif
