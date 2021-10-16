@@ -6,7 +6,7 @@ cApp::cApp() {}
 
 cApp::~cApp() {}
 
-bool cApp::onInit()
+bool cApp::OnInit()
 {
 	m_frame1 = new Main();
 	m_frame1->Show();

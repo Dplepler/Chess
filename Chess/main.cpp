@@ -8,6 +8,13 @@ Main::Main() : wxFrame(nullptr, wxID_ANY, "Plepler Chess")
 
 }
 
+Main::~Main()
+{
+
+
+
+}
+
 
 
 //int main(void)

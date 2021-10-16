@@ -12,7 +12,7 @@ public:
 	cApp();
 	~cApp();
 
-	virtual bool onInit();
+	virtual bool OnInit();
 
 private:
 	Main* m_frame1 = nullptr;
