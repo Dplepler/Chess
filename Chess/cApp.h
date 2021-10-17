@@ -2,6 +2,7 @@
 #define CAPP_CLASS_H
 
 #include "wx/wx.h"
+#include "wx/bitmap.h"
 #include "wxImagePanel.h"
 #include "wx/sizer.h"
 

@@ -1,15 +1,11 @@
 #include "wxImagePanel.h"
 
 BEGIN_EVENT_TABLE(wxImagePanel, wxPanel)
-EVT_PAINT(wxImagePanel::paintEvent)
+    EVT_PAINT(wxImagePanel::paintEvent)
 END_EVENT_TABLE()
 
-wxImagePanel::wxImagePanel(wxFrame* parent, wxString file, wxBitmapType format) :
-    wxPanel(parent)
-{
-    // load the file... ideally add a check to see if loading was successful
-    image.LoadFile(file, format);
-}
+wxImagePanel::wxImagePanel(wxFrame* parent) :
+    wxPanel(parent) {}
 
 /*
  * Called by the system of by wxWidgets when the panel needs
@@ -46,5 +42,26 @@ void wxImagePanel::paintNow()
  */
 void wxImagePanel::render(wxDC &dc)
 {
-    dc.DrawBitmap(image, 0, 0, false);
+    unsigned int i = 0;
+    size_t size = this->images.size();
+
+    for (i = 0; i < size; i++)
+    {
+        dc.DrawBitmap(images[i], 0, 0, false);
+    }
+   
+}
+
+void wxImagePanel::addImage(wxImage* img, wxString file, wxBitmapType format)
+{
+    wxBitmap image = wxBitmap(*img);
+
+    image.LoadFile(file, format);
+
+    images.push_back(image);
+
+
+
+
+
 }

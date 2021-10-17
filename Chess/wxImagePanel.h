@@ -2,15 +2,18 @@
 #define WX_IMAGE_PANEL_CLASS_H
 
 #include "wx/wx.h"
+#include <vector>
 
 class wxImagePanel : public wxPanel
 {
-    wxBitmap image;
+    std::vector<wxBitmap> images;
 
 public:
-    wxImagePanel(wxFrame* parent, wxString file, wxBitmapType format);
+    wxImagePanel(wxFrame* parent);
+    void addImage(wxImage* img, wxString file, wxBitmapType format);
 
     void paintEvent(wxPaintEvent &evt);
+
     void paintNow();
 
     void render(wxDC &dc);
