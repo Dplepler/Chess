@@ -47,21 +47,19 @@ void wxImagePanel::render(wxDC &dc)
 
     for (i = 0; i < size; i++)
     {
-        dc.DrawBitmap(images[i], 0, 0, false);
+        dc.DrawBitmap(images[i], coords[i].x, coords[i].y, false);
     }
    
 }
 
-void wxImagePanel::addImage(wxImage* img, wxString file, wxBitmapType format)
+void wxImagePanel::addImage(wxImage* img, wxString file, wxBitmapType format, wxPoint coords)
 {
     wxBitmap image = wxBitmap(*img);
 
     image.LoadFile(file, format);
 
     images.push_back(image);
-
-
-
+    this->coords.push_back(coords);
 
 
 }

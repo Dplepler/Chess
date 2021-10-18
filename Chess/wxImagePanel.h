@@ -7,10 +7,11 @@
 class wxImagePanel : public wxPanel
 {
     std::vector<wxBitmap> images;
+    std::vector<wxPoint> coords;
 
 public:
     wxImagePanel(wxFrame* parent);
-    void addImage(wxImage* img, wxString file, wxBitmapType format);
+    void addImage(wxImage* img, wxString file, wxBitmapType format, wxPoint coords);
 
     void paintEvent(wxPaintEvent &evt);
 
