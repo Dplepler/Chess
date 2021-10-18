@@ -7,6 +7,9 @@ cApp::~cApp() {}
 
 bool cApp::OnInit()
 {
+	unsigned int i = 0;
+	std::string str;
+	wxImage* image;
 
 	wxInitAllImageHandlers();
 
@@ -16,7 +19,14 @@ bool cApp::OnInit()
 	drawPane = new wxImagePanel(m_frame1);
 	
 	drawPane->addImage(new wxImage(934, 700), "Images/chessBoard.png", wxBITMAP_TYPE_PNG, wxPoint(0, 0));
-	drawPane->addImage(new wxImage(75, 75), "Images/King.png", wxBITMAP_TYPE_PNG, wxPoint(50, 50));
+
+	for (i = 0; i < UNIQUE_PIECE_AMOUNT; i++)
+	{
+		image = new wxImage(100, 100);
+		str = "Images/" + std::to_string(i) + ".png";
+		drawPane->addImage(image, str, wxBITMAP_TYPE_PNG, wxPoint(i * 75 + 175, 55));
+	}
+	
 
 	sizer->Add(drawPane, 1, wxEXPAND);
 	m_frame1->SetSizer(sizer);

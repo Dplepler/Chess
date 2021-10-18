@@ -6,8 +6,12 @@
 #include "wxImagePanel.h"
 #include "wx/sizer.h"
 
+#include <iostream>
+
 #define WIDTH 950
 #define HEIGHT 739
+
+#define UNIQUE_PIECE_AMOUNT 12
 
 
 class cApp : public wxApp

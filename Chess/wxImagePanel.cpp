@@ -56,7 +56,9 @@ void wxImagePanel::addImage(wxImage* img, wxString file, wxBitmapType format, wx
 {
     wxBitmap image = wxBitmap(*img);
 
-    image.LoadFile(file, format);
+    img->LoadFile(file, format);
+
+    image = wxBitmap(*img);
 
     images.push_back(image);
     this->coords.push_back(coords);
