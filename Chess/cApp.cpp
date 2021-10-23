@@ -35,7 +35,14 @@ bool cApp::OnInit()
 		for (i2 = 0; i2 < BOARD_WIDTH; i2++)
 		{
 			if (board->board[i][i2])
-				drawPane->addImage(board->board[i][i2]->image, wxPoint(WIDTH / (board->board[i][i2]->column + 1), HEIGHT / (board->board[i][i2]->line + 1)));
+			{
+				int x = board->board[i][i2]->column * 75 + 180;
+				int y = board->board[i][i2]->line * 75 + 55;
+
+				drawPane->addImage(board->board[i][i2]->image, wxPoint(x, y));
+
+			}
+			
 		}
 		
 	}
