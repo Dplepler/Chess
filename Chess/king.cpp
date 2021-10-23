@@ -1,7 +1,7 @@
 #include "king.h"
 #include "board.h"
 
-King::King(int line, int column, bool color) : Piece(line, column, color)
+King::King(int line, int column, bool color, wxBitmap image) : Piece(line, column, color, image)
 {
 	this->id = ID::ID_KING;
 }

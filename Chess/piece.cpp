@@ -7,13 +7,15 @@
 #include "queen.h"
 #include "king.h"
 
-Piece::Piece(int line, int column, bool color)
+Piece::Piece(int line, int column, bool color, wxBitmap image)
 {
 	this->line = line;
 	this->column = column;
 
 	this->id = ID::ID_EMPTY;
 	this->color = color;
+
+	this->image = image;
 
 }
 

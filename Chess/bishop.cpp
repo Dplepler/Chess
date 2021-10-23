@@ -1,7 +1,7 @@
 #include "bishop.h"
 #include "board.h"
 
-Bishop::Bishop(int line, int column, bool color) : Piece(line, column, color)
+Bishop::Bishop(int line, int column, bool color, wxBitmap image) : Piece(line, column, color, image)
 {
 	this->id = ID::ID_BISHOP;
 

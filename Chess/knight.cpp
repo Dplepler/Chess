@@ -1,7 +1,7 @@
 #include "knight.h"
 #include "board.h"
 
-Knight::Knight(int line, int column, bool color) : Piece(line, column, color)
+Knight::Knight(int line, int column, bool color, wxBitmap image) : Piece(line, column, color, image)
 {
 	this->id = ID::ID_KNIGHT;
 }

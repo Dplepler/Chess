@@ -2,6 +2,8 @@
 #define BOARD_CLASS_H
 
 #include <iostream>
+#include <string>
+
 #include "pawn.h"
 #include "rook.h"
 #include "knight.h"
@@ -9,7 +11,9 @@
 #include "queen.h"
 #include "king.h"
 #include "piece.h"
+#include "wxImagePanel.h"
 
+class wxImagePanel;
 class Rook;
 class Queen;
 class King;
@@ -17,6 +21,7 @@ class Knight;
 class Bishop;
 class Pawn;
 class Piece;
+
 
 #define BOARD_HEIGHT 8
 #define BOARD_WIDTH 8

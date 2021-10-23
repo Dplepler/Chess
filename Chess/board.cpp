@@ -1,4 +1,5 @@
 #include "board.h"
+#include "wxImagePanel.h"
 
 Board::Board()
 {
@@ -6,6 +7,10 @@ Board::Board()
 	unsigned int i2 = 0;
 
 	bool color = false;
+
+	wxImage* img;
+	wxBitmap image;
+	std::string file;
 
 	size_t boardSize = BOARD_HEIGHT * BOARD_WIDTH;
 
@@ -19,9 +24,13 @@ Board::Board()
 												,	{'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'}
 												,	{'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'} };
 
+	img = new wxImage(100, 100);
+	
 
 	for (i = 0; i < BOARD_HEIGHT; i++)
 	{
+		image = wxBitmap(*img);
+
 		// After two lines, switch to the black pieces
 		if (color == WHITE && i > TWICE)
 			color = BLACK;
@@ -31,22 +40,60 @@ Board::Board()
 		for (i2 = 0; i2 < BOARD_WIDTH; i2++)
 		{
 			
-
 			// Push all pieces onto the board, for places with no piece, push a null pointer
 			switch (board[i][i2])
 			{
 			
-			case 'r': this->board[i].push_back(new Rook(i, i2, color)); break;
-			case 'n': this->board[i].push_back(new Knight(i, i2, color)); break;
-			case 'b': this->board[i].push_back(new Bishop(i, i2, color)); break;
-			case 'k': this->board[i].push_back(new King(i, i2, color)); break;
-			case 'q': this->board[i].push_back(new Queen(i, i2, color)); break;
-			case 'p': this->board[i].push_back(new Pawn(i, i2, color)); break;
-			default:  this->board[i].push_back(nullptr);
+			case 'r':
+				
+				color == WHITE ? img->LoadFile("Images/7.png", wxBITMAP_TYPE_PNG) : img->LoadFile("Images/0.png", wxBITMAP_TYPE_PNG);
+
+				image = wxBitmap(*img);
+				this->board[i].push_back(new Rook(i, i2, color, image));
+				break;
+
+			case 'n': 
+				color == WHITE ? img->LoadFile("Images/8.png", wxBITMAP_TYPE_PNG) : img->LoadFile("Images/1.png", wxBITMAP_TYPE_PNG);
+				
+				image = wxBitmap(*img);
+				this->board[i].push_back(new Knight(i, i2, color, image));
+				break;
+
+			case 'b':
+				color == WHITE ? img->LoadFile("Images/11.png", wxBITMAP_TYPE_PNG) : img->LoadFile("Images/2.png", wxBITMAP_TYPE_PNG);
+
+				image = wxBitmap(*img);
+				this->board[i].push_back(new Bishop(i, i2, color, image));
+				break;
+
+			case 'k':
+				color == WHITE ? img->LoadFile("Images/10.png", wxBITMAP_TYPE_PNG) : img->LoadFile("Images/3.png", wxBITMAP_TYPE_PNG);
+
+				image = wxBitmap(*img);
+				this->board[i].push_back(new King(i, i2, color, image));
+				break;
+
+			case 'q':
+				color == WHITE ? img->LoadFile("Images/9.png", wxBITMAP_TYPE_PNG) : img->LoadFile("Images/4.png", wxBITMAP_TYPE_PNG);
+
+				image = wxBitmap(*img);
+				this->board[i].push_back(new Queen(i, i2, color, image));
+				break;
+
+			case 'p':
+				color == WHITE ? img->LoadFile("Images/6.png", wxBITMAP_TYPE_PNG) : img->LoadFile("Images/5.png", wxBITMAP_TYPE_PNG);
+
+				image = wxBitmap(*img);
+				this->board[i].push_back(new Pawn(i, i2, color, image));
+				break;
+
+			default: this->board[i].push_back(nullptr);
 
 			}
 		}
 	}
+
+
 
 }
 

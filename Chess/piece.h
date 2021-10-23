@@ -4,10 +4,13 @@
 #include <vector>
 #include <cmath>
 
+#include "wxImagePanel.h"
+
 #define WHITE 0
 #define BLACK 1
 #define TWO 2.f
 
+class wxImagePanel;
 class Board;
 class Rook;
 class Queen;
@@ -26,6 +29,8 @@ public:
 	int column;
 	bool color;
 
+	wxBitmap image;
+
 	enum class ID
 	{
 		ID_PAWN,
@@ -39,7 +44,7 @@ public:
 	} id;
 
 
-	Piece(int line, int column, bool color);
+	Piece(int line, int column, bool color, wxBitmap image);
 
 	void updateCoords(int line, int column);
 	static const char* idToString(ID id);

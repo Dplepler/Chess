@@ -52,16 +52,9 @@ void wxImagePanel::render(wxDC &dc)
    
 }
 
-void wxImagePanel::addImage(wxImage* img, wxString file, wxBitmapType format, wxPoint coords)
+void wxImagePanel::addImage(wxBitmap img, wxPoint coords)
 {
-    wxBitmap image = wxBitmap(*img);
-
-    img->LoadFile(file, format);
-
-    image = wxBitmap(*img);
-
-    images.push_back(image);
+    images.push_back(img);
     this->coords.push_back(coords);
-
 
 }

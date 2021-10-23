@@ -10,7 +10,7 @@ class Bishop: public Piece
 
 public:
 	// C'tor
-	Bishop(int line, int column, bool color);
+	Bishop(int line, int column, bool color, wxBitmap image);
 
 
 private:

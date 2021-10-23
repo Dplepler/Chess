@@ -1,7 +1,7 @@
 #include "queen.h"
 #include "board.h"
 
-Queen::Queen(int line, int column, bool color) : Piece(line, column, color)
+Queen::Queen(int line, int column, bool color, wxBitmap image) : Piece(line, column, color, image)
 {
 	this->id = ID::ID_QUEEN;
 }

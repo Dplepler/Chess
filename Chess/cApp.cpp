@@ -1,4 +1,5 @@
 #include "cApp.h"
+#include "board.h"
 
 wxIMPLEMENT_APP(cApp);
 
@@ -8,8 +9,12 @@ cApp::~cApp() {}
 bool cApp::OnInit()
 {
 	unsigned int i = 0;
+	unsigned int i2 = 0;
+
+	size_t size = 0;
 	std::string str;
-	wxImage* image;
+	wxImage* img = new wxImage(WIDTH, HEIGHT);
+	wxBitmap image;
 
 	wxInitAllImageHandlers();
 
@@ -17,16 +22,24 @@ bool cApp::OnInit()
 	m_frame1 = new wxFrame(NULL, wxID_ANY, wxT("Plepler Chess"), wxPoint(50, 50), wxSize(WIDTH, HEIGHT));
 
 	drawPane = new wxImagePanel(m_frame1);
-	
-	drawPane->addImage(new wxImage(934, 700), "Images/chessBoard.png", wxBITMAP_TYPE_PNG, wxPoint(0, 0));
 
-	for (i = 0; i < UNIQUE_PIECE_AMOUNT; i++)
+	img->LoadFile("Images/chessBoard.png", wxBITMAP_TYPE_PNG);
+	image = wxBitmap(*img);
+
+	drawPane->addImage(image, wxPoint(0, 0));
+
+	Board* board = new Board();
+
+	for (i = 0; i < BOARD_HEIGHT; i++)
 	{
-		image = new wxImage(100, 100);
-		str = "Images/" + std::to_string(i) + ".png";
-		drawPane->addImage(image, str, wxBITMAP_TYPE_PNG, wxPoint(i * 75 + 175, 55));
+		for (i2 = 0; i2 < BOARD_WIDTH; i2++)
+		{
+			if (board->board[i][i2])
+				drawPane->addImage(board->board[i][i2]->image, wxPoint(WIDTH / (board->board[i][i2]->column + 1), HEIGHT / (board->board[i][i2]->line + 1)));
+		}
+		
 	}
-	
+
 
 	sizer->Add(drawPane, 1, wxEXPAND);
 	m_frame1->SetSizer(sizer);

@@ -10,7 +10,7 @@ class Queen : public Piece
 
 public:
 	// C'tor
-	Queen(int line, int column, bool color);
+	Queen(int line, int column, bool color, wxBitmap image);
 
 
 private:

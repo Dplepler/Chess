@@ -10,7 +10,7 @@ class Rook : public Piece
 
 public:
 	// C'tor
-	Rook(int line, int column, bool color);
+	Rook(int line, int column, bool color, wxBitmap image);
 
 
 private:

@@ -10,7 +10,7 @@ class King : public Piece
 
 public:
 	// C'tor
-	King(int line, int column, bool color);
+	King(int line, int column, bool color, wxBitmap image);
 
 
 private:

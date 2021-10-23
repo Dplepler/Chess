@@ -11,8 +11,9 @@
 #define WIDTH 950
 #define HEIGHT 739
 
-#define UNIQUE_PIECE_AMOUNT 12
+#define UNIQUE_PIECE_AMOUNT 6
 
+class Board;
 
 class cApp : public wxApp
 {

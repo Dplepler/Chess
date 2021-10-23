@@ -1,7 +1,7 @@
 #include "pawn.h"
 #include "board.h"
 
-Pawn::Pawn(int line, int column, bool color) : Piece(line, column, color)
+Pawn::Pawn(int line, int column, bool color, wxBitmap image) : Piece(line, column, color, image)
 {
 	this->id = ID::ID_PAWN;
 }

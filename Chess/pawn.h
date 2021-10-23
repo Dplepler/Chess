@@ -13,7 +13,7 @@ class Pawn : public Piece
 
 public:
 	// C'tor
-	Pawn(int line, int column, bool color);
+	Pawn(int line, int column, bool color, wxBitmap image);
 
 
 private:
