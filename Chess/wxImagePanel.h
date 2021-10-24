@@ -23,7 +23,7 @@ public:
 
     /*
      void mouseMoved(wxMouseEvent& event);
-     void mouseDown(wxMouseEvent& event);
+     
      void mouseWheelMoved(wxMouseEvent& event);
      void mouseReleased(wxMouseEvent& event);
      void rightClick(wxMouseEvent& event);
@@ -31,6 +31,8 @@ public:
      void keyPressed(wxKeyEvent& event);
      void keyReleased(wxKeyEvent& event);
      */
+
+    void mouseDown(wxMouseEvent& event);
 
     DECLARE_EVENT_TABLE()
 };

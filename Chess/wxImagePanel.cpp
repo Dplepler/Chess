@@ -2,6 +2,7 @@
 
 BEGIN_EVENT_TABLE(wxImagePanel, wxPanel)
     EVT_PAINT(wxImagePanel::paintEvent)
+    EVT_LEFT_DOWN(wxImagePanel::mouseDown)
 END_EVENT_TABLE()
 
 wxImagePanel::wxImagePanel(wxFrame* parent) :
@@ -56,5 +57,24 @@ void wxImagePanel::addImage(wxBitmap img, wxPoint coords)
 {
     images.push_back(img);
     this->coords.push_back(coords);
+
+}
+
+void wxImagePanel::mouseDown(wxMouseEvent& event)
+{
+
+    const wxPoint pt = wxGetMousePosition();
+    int x = ((pt.x - 168) - ((pt.x - 168) % 75)) / 75;
+    int y = ((pt.x - 55) - ((pt.x - 55) % 75)) / 75;
+
+    std::string str = std::to_string(x) + ", " + std::to_string(y);
+    wxClientDC dc(this);
+    wxFont font(45, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false);
+    dc.SetFont(font);
+    dc.SetTextForeground(wxColour(255, 102, 0));
+
+    dc.DrawText(str, 300, 200);
+
+    
 
 }
