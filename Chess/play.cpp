@@ -6,73 +6,60 @@ Play::Play()
 	this->gameOver = false;
 }
 
-void Play::makeMove(Board* board)
+std::string Play::makeMove(Board* board, wxPoint src, wxPoint dst)
 {
-	int line;
-	int column;
-	bool tryAgain = false;
+	std::string errorMessage;
 
 	Piece* piece = nullptr;
 
-	do 
-	{
+	piece = board->getPiece(src.y, src.x);
 
-		tryAgain = false;
 
-		std::cout << "Make a move\n" << "line and column of piece to move (in that order): ";
-		std::cin >> line >> column;
+	//if ((piece->color == WHITE && this->turn == BLACK) || (piece->color == BLACK && this->turn == WHITE))
+	//{
+	//	errorMessage = "You can't move the other player's piece\n";
+	//}
 
-		std::cout << "\n";
 
-		piece = board->getPiece(line, column);
-
-		if (!piece)
-		{
-			tryAgain = true;
-		}
-		else if ((piece->color == WHITE && this->turn == BLACK) || (piece->color == BLACK && this->turn == WHITE))
-		{
-			tryAgain = true;
-			std::cout << "You can't move the other player's piece\n";
-		}
-			
 	
-	} while (tryAgain);
-	
-	do
-	{
-		tryAgain = false;
-
-		std::cout << "Make a move\n" << "line and column of piece to go to (in that order): ";
-		std::cin >> line >> column;
-
-		std::cout << "\n";
-
-		if (line > BOARD_HEIGHT - 1 || column > BOARD_WIDTH - 1)
-		{
-			std::cout << "One or more parameters are too high\n";
-			tryAgain = true;
-		}
-
-		else if (board->board[line][column] && board->board[line][column]->color == piece->color)
-		{
-			std::cout << "You already have a piece in the desired position\n";
-			tryAgain = true;
-		}
 			
 
-	} while (tryAgain);
-	
-
-	if (piece->checkMove(line, column, board))
+	if (piece->checkMove(dst.y, dst.x, board))
 	{
-		board->updateBoard(line, column, piece);
-		piece->updateCoords(line, column);
+		board->updateBoard(dst.y, dst.x, piece);
+		piece->updateCoords(dst.y, dst.x);
 
 		this->turn = !this->turn;
 	}
 	else
 	{
-		std::cout << "Invalid move, try again\n";
+		errorMessage = "Invalid move, try again\n";
 	}
+
+	return errorMessage;
+}
+
+bool Play::checkValidSrc(Board* board, Piece* piece)
+{
+	bool flag = true;
+
+	if ((piece->color == WHITE && this->turn == BLACK) || (piece->color == BLACK && this->turn == WHITE))
+	{
+		flag = false;
+		
+	}
+
+	return flag;
+}
+
+bool Play::checkValidDest(Board* board, Piece* piece, wxPoint coords)
+{
+	bool flag = true;;
+
+	if (board->board[coords.y][coords.x] && board->board[coords.y][coords.x]->color == piece->color)
+	{
+		flag = false;
+	}
+
+	return flag;
 }

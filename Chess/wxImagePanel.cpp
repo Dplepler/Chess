@@ -5,8 +5,12 @@ BEGIN_EVENT_TABLE(wxImagePanel, wxPanel)
     EVT_LEFT_DOWN(wxImagePanel::mouseDown)
 END_EVENT_TABLE()
 
-wxImagePanel::wxImagePanel(wxFrame* parent) :
-    wxPanel(parent) {}
+wxImagePanel::wxImagePanel(wxFrame* parent, Board* board, Play* play) :
+    wxPanel(parent) 
+{
+    this->board = board;
+    this->play = play;
+}
 
 /*
  * Called by the system of by wxWidgets when the panel needs
@@ -60,21 +64,43 @@ void wxImagePanel::addImage(wxBitmap img, wxPoint coords)
 
 }
 
+void wxImagePanel::drawText(wxPoint coords, std::string message)
+{
+    wxClientDC dc(this);
+    wxFont font(20, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false);
+    dc.SetFont(font);
+    dc.SetTextForeground(wxColour(255, 0, 0));
+    dc.DrawText(message, coords.x, coords.y);
+}
+
 void wxImagePanel::mouseDown(wxMouseEvent& event)
 {
+    int x = 0;
+    int y = 0;
+    wxPoint pt = wxGetMousePosition();
+    // Fix position of getMousePosition function 
+    pt.x -= 60;
+    pt.y -= 65;
 
-    const wxPoint pt = wxGetMousePosition();
-    int x = ((pt.x - 168) - ((pt.x - 168) % 75)) / 75;
-    int y = ((pt.x - 55) - ((pt.x - 55) % 75)) / 75;
+    // Exit if mouse click was out of the border
+    if (pt.x < 170 || pt.x > 170 + WIDTH)
+        return;
+    if (pt.y < 55 || pt.y > 55 + HEIGHT)
+        return;
 
-    std::string str = std::to_string(x) + ", " + std::to_string(y);
-    wxClientDC dc(this);
-    wxFont font(45, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false);
-    dc.SetFont(font);
-    dc.SetTextForeground(wxColour(255, 102, 0));
+    x = ((pt.x - 170) - ((pt.x - 170) % 75)) / 75;
+    y = ((pt.y - 55) - ((pt.y - 55) % 75)) / 75;
 
-    dc.DrawText(str, 300, 200);
+    Piece* piece = this->board->getPiece(y, x);
 
+    if (!this->play->checkValidSrc(this->board, piece))
+    {
+       drawText(wxPoint(500, 55), std::string("You can't move the other player's piece\n"));
+    }
+    else
+    {
     
-
+    }
+    
 }
+

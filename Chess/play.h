@@ -14,8 +14,9 @@ public:
 	bool turn;
 	bool gameOver;
 	
-	void makeMove(Board* board);
-
+	std::string makeMove(Board* board, wxPoint src, wxPoint dst);
+	bool checkValidSrc(Board* board, Piece* piece);
+	bool checkValidDest(Board* board, Piece* piece, wxPoint coords);
 
 
 };
