@@ -2,8 +2,14 @@
 #define PLAY_CLASS_H
 
 #include "board.h"
+#include "piece.h"
 #include <iostream>
 
+#define SELECT 0
+#define MOVE 1
+
+class Board;
+class Piece;
 
 class Play
 {
@@ -12,6 +18,7 @@ public:
 
 	Play();
 	bool turn;
+	bool selectOrMove;
 	bool gameOver;
 	
 	std::string makeMove(Board* board, wxPoint src, wxPoint dst);
@@ -20,7 +27,6 @@ public:
 
 
 };
-
 
 
 

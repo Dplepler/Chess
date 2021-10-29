@@ -1,5 +1,4 @@
 #include "knight.h"
-#include "board.h"
 
 Knight::Knight(int line, int column, bool color, wxBitmap image) : Piece(line, column, color, image)
 {

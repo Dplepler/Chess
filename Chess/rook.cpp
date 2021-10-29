@@ -1,5 +1,4 @@
-#include "rook.h".
-#include "board.h"
+#include "rook.h"
 
 Rook::Rook(int line, int column, bool color, wxBitmap image) : Piece(line, column, color, image)
 {

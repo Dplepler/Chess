@@ -7,6 +7,7 @@
 #define WHITE_PAWN_POS 1
 
 class Piece;
+class Board;
 
 class Pawn : public Piece
 {

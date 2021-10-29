@@ -1,5 +1,4 @@
 #include "pawn.h"
-#include "board.h"
 
 Pawn::Pawn(int line, int column, bool color, wxBitmap image) : Piece(line, column, color, image)
 {

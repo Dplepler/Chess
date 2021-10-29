@@ -8,6 +8,7 @@ END_EVENT_TABLE()
 wxImagePanel::wxImagePanel(wxFrame* parent, Board* board, Play* play) :
     wxPanel(parent) 
 {
+    this->window = parent;
     this->board = board;
     this->play = play;
 }
@@ -75,9 +76,13 @@ void wxImagePanel::drawText(wxPoint coords, std::string message)
 
 void wxImagePanel::mouseDown(wxMouseEvent& event)
 {
+    wxPoint pt = wxGetMousePosition();
+    static wxDragImage* drag = nullptr;
+    static Piece* piece = nullptr;
+
     int x = 0;
     int y = 0;
-    wxPoint pt = wxGetMousePosition();
+
     // Fix position of getMousePosition function 
     pt.x -= 60;
     pt.y -= 65;
@@ -91,15 +96,29 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     x = ((pt.x - 170) - ((pt.x - 170) % 75)) / 75;
     y = ((pt.y - 55) - ((pt.y - 55) % 75)) / 75;
 
-    Piece* piece = this->board->getPiece(y, x);
+    if (this->play->turn == SELECT)
+        piece = this->board->getPiece(y, x);
 
-    if (!this->play->checkValidSrc(this->board, piece))
+    if (this->play->selectOrMove == SELECT && !this->play->checkValidSrc(this->board, piece))
     {
        drawText(wxPoint(500, 55), std::string("You can't move the other player's piece\n"));
     }
+    else if (this->play->selectOrMove == MOVE && !this->play->checkValidDest(this->board, piece, wxPoint(x, y)))
+    {
+        drawText(wxPoint(500, 55), std::string("You already have a piece at the desired position\n"));
+    }
     else
     {
-    
+        if (this->play->selectOrMove == SELECT)
+        {
+            drag = new wxDragImage(piece->image);
+        }
+        else
+        {
+            //this->window->Show();
+            drag->BeginDrag(wxPoint(x, y), this->window, false);
+            drag->EndDrag();
+        }
     }
     
 }

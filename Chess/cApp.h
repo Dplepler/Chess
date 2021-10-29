@@ -13,8 +13,6 @@
 
 #define UNIQUE_PIECE_AMOUNT 6
 
-class Board;
-
 class cApp : public wxApp
 {
 

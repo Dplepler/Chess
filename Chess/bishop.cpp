@@ -1,5 +1,4 @@
 #include "bishop.h"
-#include "board.h"
 
 Bishop::Bishop(int line, int column, bool color, wxBitmap image) : Piece(line, column, color, image)
 {

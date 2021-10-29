@@ -4,20 +4,21 @@
 #include <vector>
 #include <cmath>
 
-#include "wxImagePanel.h"
+#include "wx/wx.h"
+#include "board.h"
 
 #define WHITE 0
 #define BLACK 1
 #define TWO 2.f
 
-class wxImagePanel;
 class Board;
 class Rook;
-class Queen;
-class King;
 class Knight;
 class Bishop;
+class Queen;
+class King;
 class Pawn;
+
 
 
 class Piece

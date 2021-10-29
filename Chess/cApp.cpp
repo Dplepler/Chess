@@ -1,5 +1,4 @@
 #include "cApp.h"
-#include "board.h"
 
 wxIMPLEMENT_APP(cApp);
 
@@ -10,6 +9,9 @@ bool cApp::OnInit()
 {
 	unsigned int i = 0;
 	unsigned int i2 = 0;
+
+	int x = 0;
+	int y = 0;
 
 	size_t size = 0;
 	std::string str;
@@ -27,7 +29,7 @@ bool cApp::OnInit()
 
 	img->LoadFile("Images/Chess.png", wxBITMAP_TYPE_PNG);
 	image = wxBitmap(*img);
-
+	
 	drawPane->addImage(image, wxPoint(0, 0));
 
 	img->LoadFile("Images/Board.png", wxBITMAP_TYPE_PNG);
@@ -40,8 +42,8 @@ bool cApp::OnInit()
 		{
 			if (board->board[i][i2])
 			{
-				int x = board->board[i][i2]->column * 75 + 170;
-				int y = board->board[i][i2]->line * 75 + 55;
+				x = board->board[i][i2]->column * 75 + 170;
+				y = board->board[i][i2]->line * 75 + 55;
 
 				drawPane->addImage(board->board[i][i2]->image, wxPoint(x, y));
 

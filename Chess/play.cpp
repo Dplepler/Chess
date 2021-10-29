@@ -3,6 +3,7 @@
 Play::Play()
 {
 	this->turn = WHITE;
+	this->selectOrMove = SELECT;
 	this->gameOver = false;
 }
 
@@ -13,12 +14,6 @@ std::string Play::makeMove(Board* board, wxPoint src, wxPoint dst)
 	Piece* piece = nullptr;
 
 	piece = board->getPiece(src.y, src.x);
-
-
-	//if ((piece->color == WHITE && this->turn == BLACK) || (piece->color == BLACK && this->turn == WHITE))
-	//{
-	//	errorMessage = "You can't move the other player's piece\n";
-	//}
 
 
 	
@@ -46,7 +41,6 @@ bool Play::checkValidSrc(Board* board, Piece* piece)
 	if ((piece->color == WHITE && this->turn == BLACK) || (piece->color == BLACK && this->turn == WHITE))
 	{
 		flag = false;
-		
 	}
 
 	return flag;

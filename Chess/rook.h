@@ -4,6 +4,7 @@
 #include "piece.h"
 
 class Piece;
+class Board;
 
 class Rook : public Piece
 {

@@ -1,12 +1,5 @@
 #include "piece.h"
 
-#include "pawn.h"
-#include "rook.h"
-#include "knight.h"
-#include "bishop.h"
-#include "queen.h"
-#include "king.h"
-
 Piece::Piece(int line, int column, bool color, wxBitmap image)
 {
 	this->line = line;
