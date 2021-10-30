@@ -7,17 +7,10 @@ Play::Play()
 	this->gameOver = false;
 }
 
-std::string Play::makeMove(Board* board, wxPoint src, wxPoint dst)
+std::string Play::makeMove(Board* board, Piece* piece, wxPoint dst)
 {
 	std::string errorMessage;
-
-	Piece* piece = nullptr;
-
-	piece = board->getPiece(src.y, src.x);
-
-
-	
-			
+	this->selectOrMove = SELECT;
 
 	if (piece->checkMove(dst.y, dst.x, board))
 	{

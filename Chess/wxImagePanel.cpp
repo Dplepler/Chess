@@ -77,6 +77,8 @@ void wxImagePanel::drawText(wxPoint coords, std::string message)
 void wxImagePanel::mouseDown(wxMouseEvent& event)
 {
     wxPoint pt = wxGetMousePosition();
+    int fixedPointX = 0;
+    int fixedPointY = 0;
     static wxDragImage* drag = nullptr;
     static Piece* piece = nullptr;
 
@@ -84,8 +86,9 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     int y = 0;
 
     // Fix position of getMousePosition function 
-    pt.x -= 60;
-    pt.y -= 65;
+    fixedPointX = pt.x - 60;
+    fixedPointY = pt.y - 65;
+    //drawText(wxPoint(pt.x, pt.y), std::string(std::to_string(pt.x) + ", " + std::to_string(pt.y)));
 
     // Exit if mouse click was out of the border
     if (pt.x < 170 || pt.x > 170 + WIDTH)
@@ -96,8 +99,11 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     x = ((pt.x - 170) - ((pt.x - 170) % 75)) / 75;
     y = ((pt.y - 55) - ((pt.y - 55) % 75)) / 75;
 
-    if (this->play->turn == SELECT)
+    if (this->play->selectOrMove == SELECT)
         piece = this->board->getPiece(y, x);
+
+    if (!piece)
+        return;
 
     if (this->play->selectOrMove == SELECT && !this->play->checkValidSrc(this->board, piece))
     {
@@ -112,11 +118,13 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
         if (this->play->selectOrMove == SELECT)
         {
             drag = new wxDragImage(piece->image);
+            this->play->selectOrMove = MOVE;
         }
         else
         {
-            //this->window->Show();
-            drag->BeginDrag(wxPoint(x, y), this->window, false);
+            this->play->makeMove(this->board, piece, wxPoint(x, y));
+            drag->BeginDrag(wxPoint(pt.x, pt.y), this->window, false);
+            drag->Move(wxPoint(pt.x, pt.y));
             drag->EndDrag();
         }
     }

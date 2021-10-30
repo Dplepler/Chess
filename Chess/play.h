@@ -21,7 +21,7 @@ public:
 	bool selectOrMove;
 	bool gameOver;
 	
-	std::string makeMove(Board* board, wxPoint src, wxPoint dst);
+	std::string makeMove(Board* board, Piece* piece, wxPoint dst);
 	bool checkValidSrc(Board* board, Piece* piece);
 	bool checkValidDest(Board* board, Piece* piece, wxPoint coords);
 
