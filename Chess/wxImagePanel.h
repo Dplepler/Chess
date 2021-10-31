@@ -24,8 +24,10 @@ public:
     
 
     wxImagePanel(wxFrame* parent, Board* board, Play* play);
-    void addImage(wxBitmap img, wxPoint coords);
+    int searchImage(wxBitmap img);
 
+    void addImage(wxBitmap img, wxPoint coord);
+    
     void paintEvent(wxPaintEvent &evt);
 
     void drawText(wxPoint coords, std::string message);

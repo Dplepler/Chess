@@ -7,9 +7,9 @@ Play::Play()
 	this->gameOver = false;
 }
 
-std::string Play::makeMove(Board* board, Piece* piece, wxPoint dst)
+bool Play::makeMove(Board* board, Piece* piece, wxPoint dst)
 {
-	std::string errorMessage;
+	bool flag = false;
 	this->selectOrMove = SELECT;
 
 	if (piece->checkMove(dst.y, dst.x, board))
@@ -21,10 +21,10 @@ std::string Play::makeMove(Board* board, Piece* piece, wxPoint dst)
 	}
 	else
 	{
-		errorMessage = "Invalid move, try again\n";
+		flag = true;
 	}
 
-	return errorMessage;
+	return flag;
 }
 
 bool Play::checkValidSrc(Board* board, Piece* piece)
