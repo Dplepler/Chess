@@ -11,7 +11,7 @@ class Knight : public Piece
 
 public:
 	// C'tor
-	Knight(int line, int column, bool color, wxBitmap image);
+	Knight(int line, int column, bool color, wxBitmap* image);
 
 
 private:

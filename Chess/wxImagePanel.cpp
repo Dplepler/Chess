@@ -53,19 +53,19 @@ void wxImagePanel::render(wxDC &dc)
 
     for (i = 0; i < size; i++)
     {
-        dc.DrawBitmap(images[i], coords[i].x, coords[i].y, false);
+        dc.DrawBitmap(*images[i], coords[i].x, coords[i].y, false);
     }
    
 }
 
-void wxImagePanel::addImage(wxBitmap img, wxPoint coords)
+void wxImagePanel::addImage(wxBitmap* img, wxPoint coords)
 {
     this->images.push_back(img);
     this->coords.push_back(coords);
 
 }
 
-int wxImagePanel::searchImage(wxBitmap img)
+int wxImagePanel::searchImage(wxBitmap* img)
 {
     size_t size = this->coords.size();
     unsigned int i = 0;
@@ -73,7 +73,7 @@ int wxImagePanel::searchImage(wxBitmap img)
 
     for (i = 0; i < size && index == -1; i++)
     {
-        if (&this->images[i] == &img)
+        if (this->images[i] == img)
         {
             index = i;
         }
@@ -152,12 +152,12 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
             moveY = piece->line * 75 + 55;
 
             drawText(wxPoint(pt.x, pt.y), std::string(std::to_string(piece->column) + ", " + std::to_string(piece->line)));
-            if (index = (this->searchImage(piece->image)) > -1)
+            if ((index = this->searchImage(piece->image)) > -1)
             {
                 this->coords[index] = wxPoint(moveX, moveY);
             }
             
-
+            this->window->Refresh();
 
 
             /*drag->BeginDrag(wxPoint(pt.x, pt.y), this->window, false);

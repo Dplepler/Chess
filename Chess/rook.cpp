@@ -1,6 +1,6 @@
 #include "rook.h"
 
-Rook::Rook(int line, int column, bool color, wxBitmap image) : Piece(line, column, color, image)
+Rook::Rook(int line, int column, bool color, wxBitmap* image) : Piece(line, column, color, image)
 {
 	this->id = ID::ID_ROOK;
 }

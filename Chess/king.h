@@ -11,7 +11,7 @@ class King : public Piece
 
 public:
 	// C'tor
-	King(int line, int column, bool color, wxBitmap image);
+	King(int line, int column, bool color, wxBitmap* image);
 
 
 private:

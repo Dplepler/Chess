@@ -16,7 +16,7 @@ class wxImagePanel : public wxPanel
 
 public:
 
-    std::vector<wxBitmap> images;
+    std::vector<wxBitmap*> images;
     std::vector<wxPoint> coords;
 
     Board* board;
@@ -24,9 +24,9 @@ public:
     
 
     wxImagePanel(wxFrame* parent, Board* board, Play* play);
-    int searchImage(wxBitmap img);
+    int searchImage(wxBitmap* img);
 
-    void addImage(wxBitmap img, wxPoint coord);
+    void addImage(wxBitmap* img, wxPoint coord);
     
     void paintEvent(wxPaintEvent &evt);
 

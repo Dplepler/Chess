@@ -1,6 +1,6 @@
 #include "pawn.h"
 
-Pawn::Pawn(int line, int column, bool color, wxBitmap image) : Piece(line, column, color, image)
+Pawn::Pawn(int line, int column, bool color, wxBitmap* image) : Piece(line, column, color, image)
 {
 	this->id = ID::ID_PAWN;
 }

@@ -16,7 +16,7 @@ bool cApp::OnInit()
 	size_t size = 0;
 	std::string str;
 	wxImage* img = new wxImage(WIDTH, HEIGHT);
-	wxBitmap image;
+	wxBitmap* image;
 
 	wxInitAllImageHandlers();
 
@@ -28,12 +28,12 @@ bool cApp::OnInit()
 	drawPane = new wxImagePanel(m_frame1, board, play);
 
 	img->LoadFile("Images/Chess.png", wxBITMAP_TYPE_PNG);
-	image = wxBitmap(*img);
+	image = new wxBitmap(*img);
 	
 	drawPane->addImage(image, wxPoint(0, 0));
 
 	img->LoadFile("Images/Board.png", wxBITMAP_TYPE_PNG);
-	image = wxBitmap(*img);
+	image = new wxBitmap(*img);
 	drawPane->addImage(image, wxPoint(170, 55));
 
 	for (i = 0; i < BOARD_HEIGHT; i++)

@@ -15,7 +15,7 @@ Board::Board()
 	bool color = false;
 
 	wxImage* img;
-	wxBitmap image;
+	wxBitmap* image;
 	std::string file;
 
 	size_t boardSize = BOARD_HEIGHT * BOARD_WIDTH;
@@ -35,7 +35,7 @@ Board::Board()
 
 	for (i = 0; i < BOARD_HEIGHT; i++)
 	{
-		image = wxBitmap(*img);
+		image = new wxBitmap(*img);
 
 		// After two lines, switch to the black pieces
 		if (color == WHITE && i > TWICE)
@@ -54,42 +54,42 @@ Board::Board()
 				
 				color == WHITE ? img->LoadFile("Images/7.png", wxBITMAP_TYPE_PNG) : img->LoadFile("Images/0.png", wxBITMAP_TYPE_PNG);
 
-				image = wxBitmap(*img);
+				image = new wxBitmap(*img);
 				this->board[i].push_back(new Rook(i, i2, color, image));
 				break;
 
 			case 'n': 
 				color == WHITE ? img->LoadFile("Images/8.png", wxBITMAP_TYPE_PNG) : img->LoadFile("Images/1.png", wxBITMAP_TYPE_PNG);
 				
-				image = wxBitmap(*img);
+				image = new wxBitmap(*img);
 				this->board[i].push_back(new Knight(i, i2, color, image));
 				break;
 
 			case 'b':
 				color == WHITE ? img->LoadFile("Images/11.png", wxBITMAP_TYPE_PNG) : img->LoadFile("Images/2.png", wxBITMAP_TYPE_PNG);
 
-				image = wxBitmap(*img);
+				image = new wxBitmap(*img);
 				this->board[i].push_back(new Bishop(i, i2, color, image));
 				break;
 
 			case 'k':
 				color == WHITE ? img->LoadFile("Images/10.png", wxBITMAP_TYPE_PNG) : img->LoadFile("Images/3.png", wxBITMAP_TYPE_PNG);
 
-				image = wxBitmap(*img);
+				image = new wxBitmap(*img);
 				this->board[i].push_back(new King(i, i2, color, image));
 				break;
 
 			case 'q':
 				color == WHITE ? img->LoadFile("Images/9.png", wxBITMAP_TYPE_PNG) : img->LoadFile("Images/4.png", wxBITMAP_TYPE_PNG);
 
-				image = wxBitmap(*img);
+				image = new wxBitmap(*img);
 				this->board[i].push_back(new Queen(i, i2, color, image));
 				break;
 
 			case 'p':
 				color == WHITE ? img->LoadFile("Images/6.png", wxBITMAP_TYPE_PNG) : img->LoadFile("Images/5.png", wxBITMAP_TYPE_PNG);
 
-				image = wxBitmap(*img);
+				image = new wxBitmap(*img);
 				this->board[i].push_back(new Pawn(i, i2, color, image));
 				break;
 

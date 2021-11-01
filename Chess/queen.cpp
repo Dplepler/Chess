@@ -1,6 +1,6 @@
 #include "queen.h"
 
-Queen::Queen(int line, int column, bool color, wxBitmap image) : Piece(line, column, color, image)
+Queen::Queen(int line, int column, bool color, wxBitmap* image) : Piece(line, column, color, image)
 {
 	this->id = ID::ID_QUEEN;
 }

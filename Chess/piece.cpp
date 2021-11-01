@@ -1,6 +1,6 @@
 #include "piece.h"
 
-Piece::Piece(int line, int column, bool color, wxBitmap image)
+Piece::Piece(int line, int column, bool color, wxBitmap* image)
 {
 	this->line = line;
 	this->column = column;

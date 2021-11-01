@@ -30,7 +30,7 @@ public:
 	int column;
 	bool color;
 
-	wxBitmap image;
+	wxBitmap* image;
 
 	enum class ID
 	{
@@ -45,7 +45,7 @@ public:
 	} id;
 
 
-	Piece(int line, int column, bool color, wxBitmap image);
+	Piece(int line, int column, bool color, wxBitmap* image);
 
 	void updateCoords(int line, int column);
 	static const char* idToString(ID id);
