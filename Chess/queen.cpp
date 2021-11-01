@@ -60,8 +60,8 @@ bool Queen::checkMove(int line, int column, Board* board)
 
 	if (path == PATH::DIAGONAL)
 	{
-		yDir == YDIR::DOWN ? i = line - 1 : i = this->line - 1;
-		xDir == XDIR::RIGHT ? i2 = column - 1 : i2 = this->column - 1;
+		yDir == YDIR::DOWN ? i = line : i = this->line;
+		xDir == XDIR::RIGHT ? i2 = column : i2 = this->column;
 
 		do
 		{
@@ -77,14 +77,14 @@ bool Queen::checkMove(int line, int column, Board* board)
 		
 		if (yDir == YDIR::DOWN ? i != this->line : i != line && xDir == XDIR::RIGHT ? i2 != this->column : i2 != column && flag)
 		{
-			std::cout << "Illegal move, the Queen can't move like that\n";
+			//std::cout << "Illegal move, the Queen can't move like that\n";
 
 			flag = false;
 		}
-		else if (!flag)
-		{
-			std::cout << "Another piece is blocking the way\n";
-		}
+		//else if (!flag)
+		//{
+		//	std::cout << "Another piece is blocking the way\n";
+		//}
 	
 	
 	}
@@ -99,8 +99,8 @@ bool Queen::checkMove(int line, int column, Board* board)
 			}
 		}
 
-		if (!flag)
-			std::cout << "Another piece is blocking the way\n";
+		/*if (!flag)
+			std::cout << "Another piece is blocking the way\n";*/
 
 	}
 	else if (this->column == column && this->line != line)
@@ -113,15 +113,14 @@ bool Queen::checkMove(int line, int column, Board* board)
 			}
 		}
 
-		if (!flag)
-			std::cout << "Another piece is blocking the way\n";
+		/*if (!flag)
+			std::cout << "Another piece is blocking the way\n";*/
 		
 	}
-	else
+	/*else
 	{
 		std::cout << "Illegal move, the Queen can't move like that";
-	}
-
+	}*/
 
 	return flag;
 }

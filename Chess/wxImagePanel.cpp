@@ -94,13 +94,22 @@ void wxImagePanel::drawText(wxPoint coords, std::string message)
 void wxImagePanel::mouseDown(wxMouseEvent& event)
 {
     wxPoint pt = wxGetMousePosition();
+
+    unsigned int i = 0;
+
+
     int moveX = 0;
     int moveY = 0;
     static Piece* piece = nullptr;
+    Piece* prevPiece = nullptr;
+
+    std::vector<wxPoint>::iterator prevIndexIt;
+    std::vector<wxBitmap*>::iterator prevBitmapIt;
 
     std::string error;
 
     int index = 0;
+    int prevIndex = 0;
 
     int x = 0;
     int y = 0;
@@ -108,19 +117,15 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     // Fix position of getMousePosition function 
     pt.x -= 60;
     pt.y -= 65;
-    
-
-    // Exit if mouse click was out of the border
-    if (pt.x < 170 || pt.x > 170 + WIDTH)
-        return;
-    if (pt.y < 55 || pt.y > 55 + HEIGHT)
-        return;
 
     x = ((pt.x - 170) - ((pt.x - 170) % 75)) / 75;
     y = ((pt.y - 55) - ((pt.y - 55) % 75)) / 75;
 
-    
-
+    if (x >= BOARD_WIDTH || y >= BOARD_HEIGHT)
+        return;
+    if (x < 0 || y < 0)
+        return;
+   
     if (this->play->selectOrMove == SELECT)
         piece = this->board->getPiece(y, x);
 
@@ -130,42 +135,58 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     if (this->play->selectOrMove == SELECT && !this->play->checkValidSrc(this->board, piece))
     {
        drawText(wxPoint(500, 55), std::string("You can't move the other player's piece\n"));
+       return;
     }
     else if (this->play->selectOrMove == MOVE && !this->play->checkValidDest(this->board, piece, wxPoint(x, y)))
     {
         drawText(wxPoint(500, 55), std::string("You already have a piece at the desired position\n"));
+        return;
+    }
+   
+    if (this->play->selectOrMove == SELECT)
+    {
+        this->play->selectOrMove = MOVE;
     }
     else
     {
-        if (this->play->selectOrMove == SELECT)
+        prevPiece = this->board->getPiece(y, x);
+
+        if (this->play->makeMove(this->board, piece, wxPoint(x, y)))
         {
-            this->play->selectOrMove = MOVE;
+            drawText(wxPoint(0, 30), std::string("Invalid move, try again\n"));
+            return;
         }
-        else
+
+        moveX = piece->column * 75 + 170;
+        moveY = piece->line * 75 + 55;
+
+        drawText(wxPoint(pt.x, pt.y), std::string(std::to_string(piece->column) + ", " + std::to_string(piece->line)));
+        if ((index = this->searchImage(piece->image)) > -1)
         {
-            if (this->play->makeMove(this->board, piece, wxPoint(x, y)))
+                
+            if (prevPiece)
             {
-                drawText(wxPoint(0, 30), std::string("Invalid move, try again\n"));
+                prevIndexIt = this->coords.begin();
+                prevBitmapIt = this->images.begin();
+
+                prevIndex = this->searchImage(prevPiece->image);
+
+                for (i = 0; i < prevIndex; i++)
+                {
+                    prevIndexIt++;
+                    prevBitmapIt++;
+                }
+
+                this->coords.erase(prevIndexIt);
+                this->images.erase(prevBitmapIt);
             }
 
-            moveX = piece->column * 75 + 170;
-            moveY = piece->line * 75 + 55;
+            this->coords[index] = wxPoint(moveX, moveY);
 
-            drawText(wxPoint(pt.x, pt.y), std::string(std::to_string(piece->column) + ", " + std::to_string(piece->line)));
-            if ((index = this->searchImage(piece->image)) > -1)
-            {
-                this->coords[index] = wxPoint(moveX, moveY);
-            }
-            
-            this->window->Refresh();
-
-
-            /*drag->BeginDrag(wxPoint(pt.x, pt.y), this->window, false);
-            drag->Move(wxPoint(moveX, moveY));
-            drag->Show();
-            drag->EndDrag();*/
-            
         }
+            
+        this->window->Refresh();
     }
+    
 }
 

@@ -33,8 +33,8 @@ bool Bishop::checkMove(int line, int column, Board* board)
 	line > this->line ? yDir = YDIR::DOWN : yDir = YDIR::UP;
 	column > this->column ? xDir = XDIR::RIGHT : xDir = XDIR::LEFT;
 
-	yDir == YDIR::DOWN ? i = line - 1 : i = this->line - 1;
-	xDir == XDIR::RIGHT ? i2 = column - 1 : i2 = this->column - 1;
+	yDir == YDIR::DOWN ? i = line : i = this->line;
+	xDir == XDIR::RIGHT ? i2 = column : i2 = this->column;
 
 	do
 	{
@@ -42,7 +42,7 @@ bool Bishop::checkMove(int line, int column, Board* board)
 		{
 			flag = false;
 		}
-
+	
 		i--;
 		i2--;
 
@@ -51,14 +51,14 @@ bool Bishop::checkMove(int line, int column, Board* board)
 	
 	if (yDir == YDIR::DOWN ? i != this->line : i != line && xDir == XDIR::RIGHT ? i2 != this->column : i2 != column && flag)
 	{
-		std::cout << "Illegal move, Bishop can only move in diagonal lines\n";
+		//std::cout << "Illegal move, Bishop can only move in diagonal lines\n";
 
 		flag = false;
 	}
-	else if (!flag)
+	/*else if (!flag)
 	{
 		std::cout << "Another piece is blocking the way\n";
-	}
+	}*/
 
 	return flag;
 }

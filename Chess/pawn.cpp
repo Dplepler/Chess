@@ -11,6 +11,8 @@ bool Pawn::checkMove(int line, int column, Board* board)
 	int lineMovement = 0;
 	float columnMovement = 0.f;
 
+	Piece* collidingPiece = board->getPiece(line, column);
+
 	// Here we don't want to use the abs function as pawns can only move forward
 	if (this->color == WHITE)
 	{
@@ -27,24 +29,23 @@ bool Pawn::checkMove(int line, int column, Board* board)
 	// to move to the sides
 	if (lineMovement == TWO && !columnMovement)
 	{
-		if ((this->color == WHITE && this->line == WHITE_PAWN_POS && board->board[line + 1][column]) || this->color == BLACK && this->line == BLACK_PAWN_POS && board->board[line - 1][column])
+		if (!collidingPiece && this->column == column && (this->color == WHITE && this->line == WHITE_PAWN_POS) || (this->color == BLACK && this->line == BLACK_PAWN_POS))
 		{
 			flag = true;
 		}
-	
 	}
 	// If there was no horizontal movement or it was just one square, then we are okay
-	else if (lineMovement == 1 && !columnMovement)
+	else if (lineMovement == 1 && !columnMovement && !collidingPiece)
 	{
-			flag = true;
+		flag = true;
 	}
 	else if (lineMovement == 1 && columnMovement == 1.f)
 	{
 
-		if (board->board[line][column])
+		if (collidingPiece)
 			flag = true;
-		else
-			std::cout << "Pawn can only move diagonally when it's eating another piece\n";
+		//else
+			//std::cout << "Pawn can only move diagonally when it's eating another piece\n";
 
 	}
 

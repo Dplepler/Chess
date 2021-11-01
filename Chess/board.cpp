@@ -113,20 +113,14 @@ Piece* Board::getPiece(int line, unsigned int col)
 {
 	Piece* piece = nullptr;
 
-	if (line > BOARD_HEIGHT - 1 || col > BOARD_WIDTH - 1)
-	{
-		std::cout << "One or more parameters are too high\n";
-	}
 
-	else if (board[line][col])
+	if (line < BOARD_HEIGHT && line >= 0 && col < BOARD_WIDTH && col >= 0)
 	{
-		piece = this->board[line][col];
+		if (board[line][col])
+		{
+			piece = this->board[line][col];
+		}
 	}
-	else
-	{
-		std::cout << "Empty slot\n";
-	}
-
 
 	return piece;
 }
