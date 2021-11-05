@@ -116,8 +116,6 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
 
     x = ((pt.x - 170) - ((pt.x - 170) % 75)) / 75;
     y = ((pt.y - 55) - ((pt.y - 55) % 75)) / 75;
-
-
     
 
     if (x >= BOARD_WIDTH || y >= BOARD_HEIGHT)
@@ -149,48 +147,52 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     if (this->play->selectOrMove == SELECT)
     {
         this->play->selectOrMove = MOVE;
+        return;
     }
-    else
+    
+    // For the MOVE part
+
+    prevPiece = this->board->getPiece(y, x);
+
+    if (this->play->makeMove(this->board, piece, wxPoint(x, y)))
     {
-        prevPiece = this->board->getPiece(y, x);
+        drawText(wxPoint(0, 30), std::string("Invalid move, try again\n"));
+        piece = nullptr;
+        this->play->selectOrMove = SELECT;
+        return;
+    }
 
-        if (this->play->makeMove(this->board, piece, wxPoint(x, y)))
-        {
-            drawText(wxPoint(0, 30), std::string("Invalid move, try again\n"));
-            this->play->selectOrMove = SELECT;
-            return;
-        }
+ 
+    moveX = piece->column * 75 + 170;
+    moveY = piece->line * 75 + 55;
 
-        moveX = piece->column * 75 + 170;
-        moveY = piece->line * 75 + 55;
-
-        //drawText(wxPoint(pt.x, pt.y), std::string(std::to_string(piece->column) + ", " + std::to_string(piece->line)));
-        if ((index = this->searchImage(piece->image)) > -1)
-        {
+    //drawText(wxPoint(pt.x, pt.y), std::string(std::to_string(piece->column) + ", " + std::to_string(piece->line)));
+    if (this->searchImage(piece->image) > -1)
+    {
                 
-            if (prevPiece)
+        if (prevPiece)
+        {
+            prevIndexIt = this->coords.begin();
+            prevBitmapIt = this->images.begin();
+
+            prevIndex = this->searchImage(prevPiece->image);
+
+            for (i = 0; i < prevIndex; i++)
             {
-                prevIndexIt = this->coords.begin();
-                prevBitmapIt = this->images.begin();
-
-                prevIndex = this->searchImage(prevPiece->image);
-
-                for (i = 0; i < prevIndex; i++)
-                {
-                    prevIndexIt++;
-                    prevBitmapIt++;
-                }
-
-                this->coords.erase(prevIndexIt);
-                this->images.erase(prevBitmapIt);
+                prevIndexIt++;
+                prevBitmapIt++;
             }
 
-            this->coords[index] = wxPoint(moveX, moveY);
-
+            this->coords.erase(prevIndexIt);
+            this->images.erase(prevBitmapIt);
         }
-            
-        this->window->Refresh();
+
+        this->coords[this->searchImage(piece->image)] = wxPoint(moveX, moveY);
+
     }
+            
+    this->window->Refresh();
+    
     
 }
 

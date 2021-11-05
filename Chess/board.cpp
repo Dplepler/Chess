@@ -103,13 +103,13 @@ Board::Board()
 
 }
 
-void Board::updateBoard(int line, unsigned int col, Piece* piece)
+void Board::updateBoard(int line, int col, Piece* piece)
 {
 	this->board[piece->line][piece->column] = nullptr;
 	this->board[line][col] = piece;
 }
 
-Piece* Board::getPiece(int line, unsigned int col)
+Piece* Board::getPiece(int line, int col)
 {
 	Piece* piece = nullptr;
 
