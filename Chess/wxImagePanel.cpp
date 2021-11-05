@@ -94,9 +94,9 @@ void wxImagePanel::drawText(wxPoint coords, std::string message)
 void wxImagePanel::mouseDown(wxMouseEvent& event)
 {
     wxPoint pt = wxGetMousePosition();
+    pt = this->window->ScreenToClient(pt);  // Move the mouse position to become relative to the window
 
     unsigned int i = 0;
-
 
     int moveX = 0;
     int moveY = 0;
@@ -114,18 +114,18 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     int x = 0;
     int y = 0;
 
-    // Fix position of getMousePosition function 
-    pt.x -= 60;
-    pt.y -= 65;
-
     x = ((pt.x - 170) - ((pt.x - 170) % 75)) / 75;
     y = ((pt.y - 55) - ((pt.y - 55) % 75)) / 75;
+
+
+    
 
     if (x >= BOARD_WIDTH || y >= BOARD_HEIGHT)
         return;
     if (x < 0 || y < 0)
         return;
    
+
     if (this->play->selectOrMove == SELECT)
         piece = this->board->getPiece(y, x);
 
@@ -135,11 +135,14 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     if (this->play->selectOrMove == SELECT && !this->play->checkValidSrc(this->board, piece))
     {
        drawText(wxPoint(500, 55), std::string("You can't move the other player's piece\n"));
+       piece = nullptr;
+
        return;
     }
     else if (this->play->selectOrMove == MOVE && !this->play->checkValidDest(this->board, piece, wxPoint(x, y)))
     {
         drawText(wxPoint(500, 55), std::string("You already have a piece at the desired position\n"));
+        piece = nullptr;
         return;
     }
    
@@ -154,13 +157,14 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
         if (this->play->makeMove(this->board, piece, wxPoint(x, y)))
         {
             drawText(wxPoint(0, 30), std::string("Invalid move, try again\n"));
+            this->play->selectOrMove = SELECT;
             return;
         }
 
         moveX = piece->column * 75 + 170;
         moveY = piece->line * 75 + 55;
 
-        drawText(wxPoint(pt.x, pt.y), std::string(std::to_string(piece->column) + ", " + std::to_string(piece->line)));
+        //drawText(wxPoint(pt.x, pt.y), std::string(std::to_string(piece->column) + ", " + std::to_string(piece->line)));
         if ((index = this->searchImage(piece->image)) > -1)
         {
                 
