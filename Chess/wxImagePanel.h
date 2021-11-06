@@ -27,6 +27,7 @@ public:
     int searchImage(wxBitmap* img);
 
     void addImage(wxBitmap* img, wxPoint coord);
+    void deleteImage(Piece* piece);
     
     void paintEvent(wxPaintEvent &evt);
 

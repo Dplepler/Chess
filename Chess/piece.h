@@ -20,7 +20,6 @@ class King;
 class Pawn;
 
 
-
 class Piece
 {
 

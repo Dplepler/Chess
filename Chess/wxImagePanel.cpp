@@ -103,13 +103,9 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     static Piece* piece = nullptr;
     Piece* prevPiece = nullptr;
 
-    std::vector<wxPoint>::iterator prevIndexIt;
-    std::vector<wxBitmap*>::iterator prevBitmapIt;
-
     std::string error;
 
-    int index = 0;
-    int prevIndex = 0;
+    
 
     int x = 0;
     int y = 0;
@@ -161,38 +157,43 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
         this->play->selectOrMove = SELECT;
         return;
     }
-
  
+    // Calculate amount of pixels to move
     moveX = piece->column * 75 + 170;
     moveY = piece->line * 75 + 55;
 
     //drawText(wxPoint(pt.x, pt.y), std::string(std::to_string(piece->column) + ", " + std::to_string(piece->line)));
     if (this->searchImage(piece->image) > -1)
-    {
-                
-        if (prevPiece)
-        {
-            prevIndexIt = this->coords.begin();
-            prevBitmapIt = this->images.begin();
-
-            prevIndex = this->searchImage(prevPiece->image);
-
-            for (i = 0; i < prevIndex; i++)
-            {
-                prevIndexIt++;
-                prevBitmapIt++;
-            }
-
-            this->coords.erase(prevIndexIt);
-            this->images.erase(prevBitmapIt);
-        }
+    {       
+        this->deleteImage(prevPiece);
 
         this->coords[this->searchImage(piece->image)] = wxPoint(moveX, moveY);
-
     }
             
     this->window->Refresh();
-    
-    
 }
 
+void wxImagePanel::deleteImage(Piece* piece)
+{
+    unsigned int i = 0;
+    std::vector<wxPoint>::iterator prevIndexIt;
+    std::vector<wxBitmap*>::iterator prevBitmapIt;
+    int prevIndex = 0;
+
+    if (piece)
+    {
+        prevIndexIt = this->coords.begin();
+        prevBitmapIt = this->images.begin();
+
+        prevIndex = this->searchImage(piece->image);
+
+        for (i = 0; i < prevIndex; i++) 
+        {
+            prevIndexIt++;
+            prevBitmapIt++;
+        }
+
+        this->coords.erase(prevIndexIt);
+        this->images.erase(prevBitmapIt);
+    }
+}
