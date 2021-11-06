@@ -84,6 +84,7 @@ int wxImagePanel::searchImage(wxBitmap* img)
 
 void wxImagePanel::drawText(wxPoint coords, std::string message)
 {
+    this->window->Refresh();
     wxClientDC dc(this);
     wxFont font(20, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false);
     dc.SetFont(font);
@@ -129,7 +130,7 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
         {
             this->window->Refresh();
 
-            drawText(wxPoint(500, 55), std::string("You can't move the other player's piece\n"));
+            drawText(wxPoint(0, 30), std::string("You can't move the other player's piece\n"));
             piece = nullptr;
         }
         else
@@ -149,7 +150,7 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     
     if (!this->play->checkValidDest(this->board, piece, wxPoint(x, y)))
     {
-        drawText(wxPoint(500, 55), std::string("You already have a piece at the desired position\n"));
+        drawText(wxPoint(0, 30), std::string("You already have a piece at the desired position\n"));
         this->play->setSelectOrMove(SELECT);
         piece = nullptr;
         return;

@@ -33,8 +33,8 @@ bool Bishop::checkMove(int line, int column, Board* board)
 	line > this->line ? yDir = YDIR::DOWN : yDir = YDIR::UP;
 	column > this->column ? xDir = XDIR::RIGHT : xDir = XDIR::LEFT;
 
-	yDir == YDIR::DOWN ? i = line : i = this->line;
-	xDir == XDIR::RIGHT ? i2 = column : i2 = this->column;
+	yDir == YDIR::DOWN ? i = this->line + 1 : i = this->line - 1;
+	xDir == XDIR::RIGHT ? i2 = this->column + 1 : i2 = this->column - 1;
 
 	do
 	{
@@ -42,19 +42,12 @@ bool Bishop::checkMove(int line, int column, Board* board)
 		{
 			flag = false;
 		}
-	
-		i--;
-		i2--;
 
-	} while ((yDir == YDIR::DOWN ? i > this->line : i > line) && (xDir == XDIR::RIGHT ? i2 > this->column : i2 > column) && flag);
+		yDir == YDIR::DOWN ? i++ : i--;
+		xDir == XDIR::RIGHT ? i2++ : i2--;
 
-	
-	if (yDir == YDIR::DOWN ? i != this->line : i != line && xDir == XDIR::RIGHT ? i2 != this->column : i2 != column && flag)
-	{
-		//std::cout << "Illegal move, Bishop can only move in diagonal lines\n";
+	} while ((yDir == YDIR::DOWN ? i < line : i > line) && (xDir == XDIR::RIGHT ? i2 < column : i2 > column) && flag);
 
-		flag = false;
-	}
 	/*else if (!flag)
 	{
 		std::cout << "Another piece is blocking the way\n";
