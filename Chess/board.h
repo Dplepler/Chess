@@ -27,8 +27,15 @@ public:
 
 	// C'tor
 	Board();
+	~Board();
+
+	std::vector<std::vector<Piece*>> getBoard();
+
 	void updateBoard(int line, int col, Piece* piece);
 	Piece* getPiece(int line, int col);
+
+private:
+
 	std::vector<std::vector<Piece*>> board;
 	
 

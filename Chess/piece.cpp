@@ -12,6 +12,26 @@ Piece::Piece(int line, int column, bool color, wxBitmap* image)
 
 }
 
+int Piece::getLine()
+{
+	return this->line;
+}
+
+int Piece::getColumn()
+{
+	return this->column;
+}
+
+wxBitmap* Piece::getImage()
+{
+	return this->image;
+}
+
+bool Piece::getColor()
+{
+	return this->color;
+}
+
 void Piece::updateCoords(int line, int column)
 {
 	this->line = line;

@@ -38,7 +38,7 @@ bool Bishop::checkMove(int line, int column, Board* board)
 
 	do
 	{
-		if (board->board[i][i2])
+		if (board->getBoard()[i][i2])
 		{
 			flag = false;
 		}

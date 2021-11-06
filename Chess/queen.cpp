@@ -60,12 +60,12 @@ bool Queen::checkMove(int line, int column, Board* board)
 
 	if (path == PATH::DIAGONAL)
 	{
-		yDir == YDIR::DOWN ? i = line : i = this->line;
-		xDir == XDIR::RIGHT ? i2 = column : i2 = this->column;
+		yDir == YDIR::DOWN ? i = line : i = this->line - 1;
+		xDir == XDIR::RIGHT ? i2 = column : i2 = this->column - 1;
 
 		do
 		{
-			if (board->board[i][i2])
+			if (board->getBoard()[i][i2])
 			{
 				flag = false;
 			}
@@ -75,7 +75,7 @@ bool Queen::checkMove(int line, int column, Board* board)
 
 		} while ((yDir == YDIR::DOWN ? i > this->line : i > line) && (xDir == XDIR::RIGHT ? i2 > this->column : i2 > column) && flag);
 		
-		if (yDir == YDIR::DOWN ? i != this->line : i != line && xDir == XDIR::RIGHT ? i2 != this->column : i2 != column && flag)
+		if (yDir == YDIR::DOWN ? i != this->line : i  + 1 != line && xDir == XDIR::RIGHT ? i2 != this->column : i2 + 1 != column && flag)
 		{
 			//std::cout << "Illegal move, the Queen can't move like that\n";
 
@@ -93,7 +93,7 @@ bool Queen::checkMove(int line, int column, Board* board)
 
 		for (xDir == XDIR::RIGHT ? i = this->column + 1 : i = column + 1; flag && xDir == XDIR::RIGHT ? i < column : i < this->column; i++)
 		{
-			if (board->board[line][i])
+			if (board->getBoard()[line][i])
 			{
 				flag = false;
 			}
@@ -107,7 +107,7 @@ bool Queen::checkMove(int line, int column, Board* board)
 	{
 		for (yDir == YDIR::DOWN ? i = this->line + 1 : i = line + 1; flag && yDir == YDIR::DOWN ? i < line : i < this->line; i++)
 		{
-			if (board->board[i][column])
+			if (board->getBoard()[i][column])
 			{
 				flag = false;
 			}

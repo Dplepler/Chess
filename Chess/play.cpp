@@ -7,6 +7,16 @@ Play::Play()
 	this->gameOver = false;
 }
 
+bool Play::isSelectOrMove()
+{
+	return this->selectOrMove;
+}
+
+void Play::setSelectOrMove(bool flag)
+{
+	this->selectOrMove = flag;
+}
+
 bool Play::makeMove(Board* board, Piece* piece, wxPoint dst)
 {
 	bool flag = false;
@@ -31,7 +41,7 @@ bool Play::checkValidSrc(Board* board, Piece* piece)
 {
 	bool flag = true;
 
-	if ((piece->color == WHITE && this->turn == BLACK) || (piece->color == BLACK && this->turn == WHITE))
+	if ((piece->getColor() == WHITE && this->turn == BLACK) || (piece->getColor() == BLACK && this->turn == WHITE))
 	{
 		flag = false;
 	}
@@ -43,7 +53,7 @@ bool Play::checkValidDest(Board* board, Piece* piece, wxPoint coords)
 {
 	bool flag = true;;
 
-	if (board->board[coords.y][coords.x] && board->board[coords.y][coords.x]->color == piece->color)
+	if (board->getBoard()[coords.y][coords.x] && board->getBoard()[coords.y][coords.x]->getColor() == piece->getColor())
 	{
 		flag = false;
 	}

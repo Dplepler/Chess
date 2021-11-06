@@ -103,16 +103,20 @@ Board::Board()
 
 }
 
+std::vector<std::vector<Piece*>> Board::getBoard()
+{
+	return this->board;
+}
+
 void Board::updateBoard(int line, int col, Piece* piece)
 {
-	this->board[piece->line][piece->column] = nullptr;
+	this->board[piece->getLine()][piece->getColumn()] = nullptr;
 	this->board[line][col] = piece;
 }
 
 Piece* Board::getPiece(int line, int col)
 {
 	Piece* piece = nullptr;
-
 
 	if (line < BOARD_HEIGHT && line >= 0 && col < BOARD_WIDTH && col >= 0)
 	{

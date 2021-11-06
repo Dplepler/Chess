@@ -17,14 +17,21 @@ class Play
 public:
 
 	Play();
-	bool turn;
-	bool selectOrMove;
-	bool gameOver;
+	~Play();
+
+	bool isSelectOrMove();
 	
+	void setSelectOrMove(bool flag);
+
 	bool makeMove(Board* board, Piece* piece, wxPoint dst);
 	bool checkValidSrc(Board* board, Piece* piece);
 	bool checkValidDest(Board* board, Piece* piece, wxPoint coords);
 
+private:
+
+	bool turn;
+	bool selectOrMove;
+	bool gameOver;
 
 };
 

@@ -25,12 +25,6 @@ class Piece
 
 public:
 
-	int line;
-	int column;
-	bool color;
-
-	wxBitmap* image;
-
 	enum class ID
 	{
 		ID_PAWN,
@@ -43,12 +37,25 @@ public:
 
 	} id;
 
-
 	Piece(int line, int column, bool color, wxBitmap* image);
+
+	int getLine();
+	int getColumn();
+	bool getColor();
+	wxBitmap* getImage();
 
 	void updateCoords(int line, int column);
 	static const char* idToString(ID id);
 	virtual bool checkMove(int line, int column, Board* board) = 0;	
+
+protected:
+
+	int line;
+	int column;
+	bool color;
+
+	wxBitmap* image;
+
 
 };
 

@@ -105,8 +105,6 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
 
     std::string error;
 
-    
-
     int x = 0;
     int y = 0;
 
@@ -119,34 +117,43 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     if (x < 0 || y < 0)
         return;
    
-
-    if (this->play->selectOrMove == SELECT)
+    // For the select operation, get the piece in the selected location and exit
+    if (this->play->isSelectOrMove() == SELECT)
+    {
         piece = this->board->getPiece(y, x);
 
+        if (!piece)
+            return;
+
+        if (!this->play->checkValidSrc(this->board, piece))
+        {
+            this->window->Refresh();
+
+            drawText(wxPoint(500, 55), std::string("You can't move the other player's piece\n"));
+            piece = nullptr;
+        }
+        else
+        {
+            this->play->setSelectOrMove(MOVE);
+            
+        } 
+
+        return;
+    }
+       
+    // Exit if there's no piece
     if (!piece)
         return;
 
-    if (this->play->selectOrMove == SELECT && !this->play->checkValidSrc(this->board, piece))
-    {
-       drawText(wxPoint(500, 55), std::string("You can't move the other player's piece\n"));
-       piece = nullptr;
-
-       return;
-    }
-    else if (this->play->selectOrMove == MOVE && !this->play->checkValidDest(this->board, piece, wxPoint(x, y)))
+    /* Everything from here is for piece movement */
+    
+    if (!this->play->checkValidDest(this->board, piece, wxPoint(x, y)))
     {
         drawText(wxPoint(500, 55), std::string("You already have a piece at the desired position\n"));
+        this->play->setSelectOrMove(SELECT);
         piece = nullptr;
         return;
     }
-   
-    if (this->play->selectOrMove == SELECT)
-    {
-        this->play->selectOrMove = MOVE;
-        return;
-    }
-    
-    // For the MOVE part
 
     prevPiece = this->board->getPiece(y, x);
 
@@ -154,20 +161,21 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     {
         drawText(wxPoint(0, 30), std::string("Invalid move, try again\n"));
         piece = nullptr;
-        this->play->selectOrMove = SELECT;
+        this->play->setSelectOrMove(SELECT);
+
         return;
     }
  
     // Calculate amount of pixels to move
-    moveX = piece->column * 75 + 170;
-    moveY = piece->line * 75 + 55;
+    moveX = piece->getColumn() * 75 + 170;
+    moveY = piece->getLine() * 75 + 55;
 
     //drawText(wxPoint(pt.x, pt.y), std::string(std::to_string(piece->column) + ", " + std::to_string(piece->line)));
-    if (this->searchImage(piece->image) > -1)
+    if (this->searchImage(piece->getImage()) > -1)
     {       
         this->deleteImage(prevPiece);
 
-        this->coords[this->searchImage(piece->image)] = wxPoint(moveX, moveY);
+        this->coords[this->searchImage(piece->getImage())] = wxPoint(moveX, moveY);
     }
             
     this->window->Refresh();
@@ -185,7 +193,7 @@ void wxImagePanel::deleteImage(Piece* piece)
         prevIndexIt = this->coords.begin();
         prevBitmapIt = this->images.begin();
 
-        prevIndex = this->searchImage(piece->image);
+        prevIndex = this->searchImage(piece->getImage());
 
         for (i = 0; i < prevIndex; i++) 
         {

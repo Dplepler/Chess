@@ -13,15 +13,7 @@
 class wxImagePanel : public wxPanel
 {
 
-
-public:
-
-    std::vector<wxBitmap*> images;
-    std::vector<wxPoint> coords;
-
-    Board* board;
-    Play* play;
-    
+public:    
 
     wxImagePanel(wxFrame* parent, Board* board, Play* play);
     int searchImage(wxBitmap* img);
@@ -40,8 +32,13 @@ public:
     DECLARE_EVENT_TABLE()
 
 private:
-    wxWindow* window;
 
+    wxWindow* window;
+    std::vector<wxBitmap*> images;
+    std::vector<wxPoint> coords;
+
+    Board* board;
+    Play* play;
     
 };
 
