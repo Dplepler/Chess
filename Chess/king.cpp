@@ -15,13 +15,9 @@ bool King::checkMove(int line, int column, Board* board)
 	if (this->line == line && this->column == column)
 		return false;
 
-	if (lineMovement > 0 || columnMovement > 0)
+	if (lineMovement <= 1.f && columnMovement <= 1.f)
 	{
 		flag = true;
-	}
-	else
-	{
-		flag = false;
 	}
 
 	return flag;
