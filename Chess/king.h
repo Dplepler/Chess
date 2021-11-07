@@ -3,6 +3,9 @@
 
 #include "piece.h"
 
+#define TWO 2
+#define ONE 1
+
 class Piece;
 class Board;
 
@@ -31,6 +34,7 @@ public:
 	bool checkCheck(Board* board);
 	void checkLine(unsigned int startPos, unsigned int endPos, bool lineOrCol, Board* board);
 	void checkDiagonal(wxPoint dst, Board* board);
+	void checkHorse(Board* board);
 	
 private:
 
