@@ -92,11 +92,16 @@ void King::checkDiagonal(wxPoint dst, Board* board)
 			this->check = true;
 			break;
 		}
+		else if (piece && piece->getColor() != this->color && piece->id == ID::ID_PAWN)
+		{
+			if (!(piece->getColor() ? i == this->line - 1 : i == this->line + 1))
+				this->check = false;
+		}
 		else if (piece && piece->getColor() == this->color)
 		{
 			break;
 		}
-
+	
 		yDir == YDIR::DOWN ? i++ : i--;
 		xDir == XDIR::RIGHT ? i2++ : i2--;
 
