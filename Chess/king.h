@@ -6,6 +6,20 @@
 class Piece;
 class Board;
 
+enum class XDIR
+{
+	LEFT,
+	RIGHT
+
+};
+
+enum class YDIR
+{
+	UP,
+	DOWN
+
+};
+
 class King : public Piece
 {
 
@@ -15,8 +29,8 @@ public:
 	
 	bool isCheck();
 	bool checkCheck(Board* board);
-	void checkLine(unsigned int startPos, unsigned int endPos, unsigned int staticPos, Board* board);
-
+	void checkLine(unsigned int startPos, unsigned int endPos, bool lineOrCol, Board* board);
+	void checkDiagonal(wxPoint dst, Board* board);
 	
 private:
 

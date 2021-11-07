@@ -35,28 +35,70 @@ bool King::checkCheck(Board* board)
 	unsigned int i = 0;
 	unsigned int i2 = 0;
 	
-	this->checkLine(this->line + 1, BOARD_HEIGHT - this->line - 1, this->column, board);
-	this->checkLine(this->column + 1, BOARD_HEIGHT - this->column - 1, this->line, board);
-	this->checkLine(0, this->line, this->column, board);
-	this->checkLine(0, this->column, this->line, board);
+	this->checkLine(this->line + 1, BOARD_HEIGHT - this->line - 1, this->column, board);	// Check right line
+	this->checkLine(this->column + 1, BOARD_HEIGHT - this->column - 1, this->line, board);	// Check right column
+	this->checkLine(0, this->line, this->column, board);									// Check left line
+	this->checkLine(0, this->column, this->line, board);									// Check left column
 
-	
+	this->checkDiagonal(wxPoint(0, 0), board);												// Left lower corner
+	this->checkDiagonal(wxPoint(0, BOARD_WIDTH), board);										// left upper corner
+	this->checkDiagonal(wxPoint(BOARD_WIDTH, BOARD_WIDTH), board);							// Right upper corner
+	this->checkDiagonal(wxPoint(BOARD_WIDTH, 0), board);										// Right lower corner
+
 
 
 }
 
-void King::checkLine(unsigned int startPos, unsigned int endPos, unsigned int staticPos, Board* board)
+void King::checkLine(unsigned int startPos, unsigned int endPos, bool lineOrCol, Board* board)
 {
 	Piece* piece = nullptr;
 	unsigned int i = 0;
 	
 	for (i = startPos; i <= endPos; i++)
 	{
-		piece = board->getPiece(i, staticPos);
+		lineOrCol ? piece = board->getPiece(this->line, i) : board->getPiece(i, this->column);
 
-		if (piece->id == ID::ID_ROOK || piece->id == ID::ID_QUEEN)
+		if (piece && piece->getColor() != this->color && (piece->id == ID::ID_ROOK || piece->id == ID::ID_QUEEN))
 		{
 			this->check = true;
+			break;
+		}
+		else if (piece && piece->getColor() == this->color)
+		{
+			break;
 		}
 	}
+}
+
+void King::checkDiagonal(wxPoint dst, Board* board)
+{
+	Piece* piece = nullptr;
+
+	unsigned int i = 0;
+	unsigned int i2 = 0;
+
+	YDIR yDir;
+	XDIR xDir;
+
+	dst.y > this->line ? yDir = YDIR::DOWN : yDir = YDIR::UP;
+	column > this->column ? xDir = XDIR::RIGHT : xDir = XDIR::LEFT;
+
+	do
+	{
+		piece = board->getPiece(i, i2);
+
+		if (piece && piece->getColor() != this->color && (piece->id == ID::ID_BISHOP || piece->id == ID::ID_QUEEN))
+		{
+			this->check = true;
+			break;
+		}
+		else if (piece && piece->getColor() == this->color)
+		{
+			break;
+		}
+
+		yDir == YDIR::DOWN ? i++ : i--;
+		xDir == XDIR::RIGHT ? i2++ : i2--;
+
+	} while ((yDir == YDIR::DOWN ? i < line : i > line) && (xDir == XDIR::RIGHT ? i2 < column : i2 > column));
 }
