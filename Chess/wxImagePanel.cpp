@@ -22,7 +22,9 @@ wxImagePanel::wxImagePanel(wxFrame* parent, Board* board, Play* play) :
 void wxImagePanel::paintEvent(wxPaintEvent &evt)
 {
     // depending on your system you may need to look at double-buffered dcs
+
     wxPaintDC dc(this);
+    
     render(dc);
 }
 
@@ -36,6 +38,7 @@ void wxImagePanel::paintEvent(wxPaintEvent &evt)
  */
 void wxImagePanel::paintNow()
 {
+    
     // depending on your system you may need to look at double-buffered dcs
     wxClientDC dc(this);
     render(dc);
@@ -50,12 +53,13 @@ void wxImagePanel::render(wxDC &dc)
 {
     unsigned int i = 0;
     size_t size = this->images.size();
-
+    
     for (i = 0; i < size; i++)
     {
         dc.DrawBitmap(*images[i], coords[i].x, coords[i].y, false);
     }
-   
+
+    dc.DrawRectangle(0, 0, 1000, 50);
 }
 
 void wxImagePanel::addImage(wxBitmap* img, wxPoint coords)
@@ -84,8 +88,8 @@ int wxImagePanel::searchImage(wxBitmap* img)
 
 void wxImagePanel::drawText(wxPoint coords, std::string message)
 {
-    this->window->Refresh();
     wxClientDC dc(this);
+    dc.DrawRectangle(0, 0, 1000, 50);
     wxFont font(20, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false);
     dc.SetFont(font);
     dc.SetTextForeground(wxColour(255, 0, 0));
@@ -128,9 +132,7 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
 
         if (!this->play->checkValidSrc(this->board, piece))
         {
-            this->window->Refresh();
-
-            drawText(wxPoint(0, 30), std::string("You can't move the other player's piece\n"));
+            drawText(wxPoint(0, 20), std::string("You can't move the other player's piece\n"));
             piece = nullptr;
         }
         else
@@ -150,7 +152,7 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     
     if (!this->play->checkValidDest(this->board, piece, wxPoint(x, y)))
     {
-        drawText(wxPoint(0, 30), std::string("You already have a piece at the desired position\n"));
+        drawText(wxPoint(0, 20), std::string("You already have a piece at the desired position\n"));
         this->play->setSelectOrMove(SELECT);
         piece = nullptr;
         return;
@@ -160,7 +162,7 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
 
     if (this->play->makeMove(this->board, piece, wxPoint(x, y)))
     {
-        drawText(wxPoint(0, 30), std::string("Invalid move, try again\n"));
+        drawText(wxPoint(0, 20), std::string("Invalid move, try again\n"));
         piece = nullptr;
         this->play->setSelectOrMove(SELECT);
 

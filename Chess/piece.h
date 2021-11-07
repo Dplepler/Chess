@@ -46,7 +46,7 @@ public:
 
 	void updateCoords(int line, int column);
 	static const char* idToString(ID id);
-	virtual bool checkMove(Board* board) = 0;	
+	virtual bool checkMove(int line, int col, Board* board) = 0;	
 
 protected:
 
@@ -55,7 +55,6 @@ protected:
 	bool color;
 
 	wxBitmap* image;
-
 
 };
 

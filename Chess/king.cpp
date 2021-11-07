@@ -33,6 +33,8 @@ bool King::checkCheck(Board* board)
 {
 	Piece* piece = nullptr;
 
+	bool flag = false;
+
 	unsigned int i = 0;
 	unsigned int i2 = 0;
 	
@@ -42,11 +44,16 @@ bool King::checkCheck(Board* board)
 	this->checkLine(0, this->column, this->line, board);									// Check left column
 
 	this->checkDiagonal(wxPoint(0, 0), board);												// Left lower corner
-	this->checkDiagonal(wxPoint(0, BOARD_WIDTH), board);										// left upper corner
+	this->checkDiagonal(wxPoint(0, BOARD_WIDTH), board);									// left upper corner
 	this->checkDiagonal(wxPoint(BOARD_WIDTH, BOARD_WIDTH), board);							// Right upper corner
-	this->checkDiagonal(wxPoint(BOARD_WIDTH, 0), board);										// Right lower corner
+	this->checkDiagonal(wxPoint(BOARD_WIDTH, 0), board);									// Right lower corner
 
 	this->checkHorse(board);
+
+	if (this->check == true)
+		flag = true;
+
+	return flag;
 }
 
 void King::checkLine(unsigned int startPos, unsigned int endPos, bool lineOrCol, Board* board)
@@ -159,6 +166,5 @@ void King::checkHorse(Board* board)
 		this->check = true;
 	
 	if ((piece = board->getPiece(this->line + ONE, this->column - TWO)) && piece->getColor() != this->color && piece->id == ID::ID_KNIGHT)
-		this->check = true;
-	
+		this->check = true;	
 }

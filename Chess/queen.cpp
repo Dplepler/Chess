@@ -63,7 +63,7 @@ bool Queen::checkMove(int line, int column, Board* board)
 		yDir == YDIR::DOWN ? i = this->line + 1 : i = this->line - 1;
 		xDir == XDIR::RIGHT ? i2 = this->column + 1 : i2 = this->column - 1;
 
-		do
+		while ((yDir == YDIR::DOWN ? i < line : i > line) && (xDir == XDIR::RIGHT ? i2 < column : i2 > column) && flag)
 		{
 			if (board->getBoard()[i][i2])
 			{
@@ -73,7 +73,7 @@ bool Queen::checkMove(int line, int column, Board* board)
 			yDir == YDIR::DOWN ? i++ : i--;
 			xDir == XDIR::RIGHT ? i2++ : i2--;
 
-		} while ((yDir == YDIR::DOWN ? i < line : i > line) && (xDir == XDIR::RIGHT ? i2 < column : i2 > column) && flag);
+		}
 		
 		//else if (!flag)
 		//{
