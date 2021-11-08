@@ -19,7 +19,7 @@ public:
 	Play();
 	~Play();
 
-	bool isSelectOrMove();
+	bool isSelectOrMove() const;
 	
 	void setSelectOrMove(bool flag);
 

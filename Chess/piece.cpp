@@ -12,22 +12,22 @@ Piece::Piece(int line, int column, bool color, wxBitmap* image)
 
 }
 
-int Piece::getLine()
+int Piece::getLine() const
 {
 	return this->line;
 }
 
-int Piece::getColumn()
+int Piece::getColumn() const
 {
 	return this->column;
 }
 
-wxBitmap* Piece::getImage()
+wxBitmap* Piece::getImage() const
 {
 	return this->image;
 }
 
-bool Piece::getColor()
+bool Piece::getColor() const
 {
 	return this->color;
 }

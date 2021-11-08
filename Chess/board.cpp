@@ -114,7 +114,7 @@ void Board::updateBoard(int line, int col, Piece* piece)
 	this->board[line][col] = piece;
 }
 
-Piece* Board::getPiece(int line, int col)
+Piece* Board::getPiece(int line, int col) const
 {
 	Piece* piece = nullptr;
 

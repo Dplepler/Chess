@@ -18,7 +18,6 @@ wxImagePanel::wxImagePanel(wxFrame* parent, Board* board, Play* play) :
  * to be redrawn. You can also trigger this call by
  * calling Refresh()/Update().
  */
-
 void wxImagePanel::paintEvent(wxPaintEvent &evt)
 {
     // depending on your system you may need to look at double-buffered dcs
@@ -69,7 +68,7 @@ void wxImagePanel::addImage(wxBitmap* img, wxPoint coords)
 
 }
 
-int wxImagePanel::searchImage(wxBitmap* img)
+int wxImagePanel::searchImage(wxBitmap* img) const
 {
     size_t size = this->coords.size();
     unsigned int i = 0;

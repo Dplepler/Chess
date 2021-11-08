@@ -7,7 +7,7 @@ Play::Play()
 	this->gameOver = false;
 }
 
-bool Play::isSelectOrMove()
+bool Play::isSelectOrMove() const
 {
 	return this->selectOrMove;
 }

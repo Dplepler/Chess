@@ -39,10 +39,10 @@ public:
 
 	Piece(int line, int column, bool color, wxBitmap* image);
 
-	int getLine();
-	int getColumn();
-	bool getColor();
-	wxBitmap* getImage();
+	int getLine() const;
+	int getColumn() const;
+	bool getColor() const;
+	wxBitmap* getImage() const;
 
 	void updateCoords(int line, int column);
 	static const char* idToString(ID id);

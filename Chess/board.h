@@ -32,7 +32,7 @@ public:
 	std::vector<std::vector<Piece*>> getBoard();
 
 	void updateBoard(int line, int col, Piece* piece);
-	Piece* getPiece(int line, int col);
+	Piece* getPiece(int line, int col) const;
 
 private:
 
