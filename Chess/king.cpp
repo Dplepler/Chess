@@ -14,6 +14,8 @@ bool King::isCheck()
 bool King::checkMove(int line, int column, Board* board)
 {
 	bool flag = false;
+	int prevLine = -1;
+	int prevColumn = -1;
 
 	float lineMovement = abs(float(this->line - line));
 	float columnMovement = abs(float(this->column - column));
@@ -25,6 +27,23 @@ bool King::checkMove(int line, int column, Board* board)
 	{
 		flag = true;
 	}
+
+	
+
+	prevLine = this->line;
+	prevColumn = this->column;
+
+	this->line = line;
+	this->column = column;
+
+	// If the king is in check after the move, then it is invalid
+	if (this->checkCheck(board))
+	{
+		this->line = prevLine;
+		this->column = prevColumn;
+		flag = false;
+	}
+	
 
 	return flag;
 }
@@ -50,7 +69,7 @@ bool King::checkCheck(Board* board)
 
 	this->checkHorse(board);
 
-	if (this->check == true)
+	if (this->check)
 		flag = true;
 
 	return flag;

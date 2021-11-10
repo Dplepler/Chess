@@ -20,6 +20,7 @@ void Play::setSelectOrMove(bool flag)
 bool Play::makeMove(Board* board, Piece* piece, wxPoint dst)
 {
 	bool flag = false;
+	bool kingCheck = false;
 	this->selectOrMove = SELECT;
 
 	if (piece->checkMove(dst.y, dst.x, board))
