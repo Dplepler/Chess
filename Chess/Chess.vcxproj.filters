@@ -85,5 +85,8 @@
     <ClInclude Include="wxImagePanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PieceIDs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 
 #include "wx/wx.h"
 #include "board.h"
+#include "PieceIDs.h"
 
 #define WHITE 0
 #define BLACK 1
@@ -25,17 +26,7 @@ class Piece
 
 public:
 
-	enum class ID
-	{
-		ID_PAWN,
-		ID_ROOK,
-		ID_KNIGHT,
-		ID_BISHOP,
-		ID_QUEEN,
-		ID_KING,
-		ID_EMPTY
-
-	} id;
+	ID id;
 
 	Piece(int line, int column, bool color, wxBitmap* image);
 

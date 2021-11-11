@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include "wx/wx.h"
+#include "PieceIDs.h"
 
 class Rook;
 class Queen;
@@ -33,11 +34,19 @@ public:
 
 	void updateBoard(int line, int col, Piece* piece);
 	Piece* getPiece(int line, int col) const;
+	bool kingCheck(bool color) const;
+
+	bool checkCheck(bool color);
+	bool checkLine(unsigned int startPos, unsigned int endPos, bool lineOrCol, bool color);
+	bool checkDiagonal(wxPoint dst, bool color);
+	bool checkHorse(bool color);
+	
 
 private:
 
 	std::vector<std::vector<Piece*>> board;
-	
+	std::vector<King*> kings;
+
 
 };
 

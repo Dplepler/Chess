@@ -31,10 +31,7 @@ public:
 	King(int line, int column, bool color, wxBitmap* image);
 	
 	bool isCheck();
-	bool checkCheck(Board* board);
-	void checkLine(unsigned int startPos, unsigned int endPos, bool lineOrCol, Board* board);
-	void checkDiagonal(wxPoint dst, Board* board);
-	void checkHorse(Board* board);
+	void setCheck(bool check);
 	
 private:
 
