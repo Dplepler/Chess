@@ -28,14 +28,12 @@ bool Play::makeMove(Board* board, Piece* piece, wxPoint dst)
 
 	if (piece->checkMove(dst.y, dst.x, board))
 	{
-		if (board->checkCheck(piece->getColor()))	// If the current player's king is in check
-			kingCheck = true;
 
 		board->updateBoard(dst.y, dst.x, piece);
 		piece->updateCoords(dst.y, dst.x);
 		
-		// If the player's king was in check and his move didn't change that, it's invalid
-		if (!(kingCheck && board->checkCheck(piece->getColor())))
+		// If the player's king is in check after his move, it's invalid
+		if (!board->checkCheck(piece->getColor()))
 		{
 			this->turn = !this->turn;
 		}
