@@ -20,8 +20,9 @@ public:
 	~Play();
 
 	bool isSelectOrMove() const;
-	
+
 	void setSelectOrMove(bool flag);
+	void switchMove();
 
 	bool makeMove(Board* board, Piece* piece, wxPoint dst);
 	bool checkValidSrc(Board* board, Piece* piece);

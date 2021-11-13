@@ -167,6 +167,17 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
 
         return;
     }
+    else
+    {
+        this->play->switchMove();
+    }
+
+    if (this->board->checkMate(piece->getColor()))
+    {
+        drawText(wxPoint(0, 20), std::string("Checkmate!\n"));
+    }
+
+
  
     // Calculate amount of pixels to move
     moveX = piece->getColumn() * 75 + 170;

@@ -17,6 +17,11 @@ void Play::setSelectOrMove(bool flag)
 	this->selectOrMove = flag;
 }
 
+void Play::switchMove()
+{
+	this->turn = !this->turn;
+}
+
 bool Play::makeMove(Board* board, Piece* piece, wxPoint dst)
 {
 	bool flag = false;
@@ -28,16 +33,11 @@ bool Play::makeMove(Board* board, Piece* piece, wxPoint dst)
 
 	if (piece->checkMove(dst.y, dst.x, board))
 	{
-
 		board->updateBoard(dst.y, dst.x, piece);
 		piece->updateCoords(dst.y, dst.x);
 		
-		// If the player's king is in check after his move, it's invalid
-		if (!board->checkCheck(piece->getColor()))
-		{
-			this->turn = !this->turn;
-		}
-		else
+		// If the player's king is in check after his move, the move is invalid
+		if (board->checkCheck(piece->getColor()))
 		{
 			board->updateBoard(prevLine, prevCol, piece);
 			piece->updateCoords(prevLine, prevCol);

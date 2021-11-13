@@ -23,8 +23,9 @@ bool cApp::OnInit()
 	wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 	m_frame1 = new wxFrame(NULL, wxID_ANY, wxT("Plepler Chess"), wxPoint(50, 50), wxSize(WIDTH, HEIGHT));
 
-	Board* board = new Board();
 	Play* play = new Play();
+	Board* board = new Board(play);
+
 	drawPane = new wxImagePanel(m_frame1, board, play);
 
 	img->LoadFile("Images/Chess.png", wxBITMAP_TYPE_PNG);

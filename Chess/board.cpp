@@ -7,7 +7,9 @@
 #include "queen.h"
 #include "king.h"
 
-Board::Board()
+#include "play.h"
+
+Board::Board(Play* play)
 {
 	unsigned int i = 0;
 	unsigned int i2 = 0;
@@ -21,6 +23,8 @@ Board::Board()
 	King* king = nullptr;
 
 	size_t boardSize = BOARD_HEIGHT * BOARD_WIDTH;
+
+	this->play = play;
 
 	// Template for a chess board
 	const char board[BOARD_HEIGHT][BOARD_WIDTH] = { {'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'}
@@ -104,9 +108,6 @@ Board::Board()
 			}
 		}
 	}
-
-
-
 }
 
 Board::~Board() {}
@@ -159,15 +160,62 @@ bool Board::checkCheck(bool color)
 	{
 		this->kings[color]->setCheck(false);
 	}
-	
-	
-
-	
 
 	if (this->kings[color]->isCheck())
 		flag = true;
 
 	return flag;
+}
+
+bool Board::checkMate(bool color)
+{
+	int originalLine = this->kings[color]->getLine();
+	int originalCol = this->kings[color]->getColumn();
+
+	if (!checkCheck(color))
+		return false;
+	
+	this->play->makeMove(this, this->kings[color], wxPoint(originalLine - 1, originalCol - 1));
+
+	if (!checkCheck(color))
+		return false;
+
+	this->play->makeMove(this, this->kings[color], wxPoint(originalLine - 1, originalCol));
+
+	if (!checkCheck(color))
+		return false;
+
+	this->play->makeMove(this, this->kings[color], wxPoint(originalLine - 1, originalCol + 1));
+
+	if (!checkCheck(color))
+		return false;
+
+	this->play->makeMove(this, this->kings[color], wxPoint(originalLine, originalCol - 1));
+
+	if (!checkCheck(color))
+		return false;
+
+	this->play->makeMove(this, this->kings[color], wxPoint(originalLine, originalCol + 1));
+
+	if (!checkCheck(color))
+		return false;
+
+	this->play->makeMove(this, this->kings[color], wxPoint(originalLine + 1, originalCol - 1));
+
+	if (!checkCheck(color))
+		return false;
+
+	this->play->makeMove(this, this->kings[color], wxPoint(originalLine + 1, originalCol));
+
+	if (!checkCheck(color))
+		return false;
+
+	this->play->makeMove(this, this->kings[color], wxPoint(originalLine + 1, originalCol + 1));
+
+	if (!checkCheck(color))
+		return false;
+
+	return true;
 }
 
 bool Board::checkLine(unsigned int startPos, unsigned int endPos, bool lineOrCol, bool color)

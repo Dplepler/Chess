@@ -13,6 +13,7 @@ class Knight;
 class Bishop;
 class Pawn;
 class Piece;
+class Play;
 
 #define BOARD_HEIGHT 8
 #define BOARD_WIDTH 8
@@ -27,7 +28,7 @@ class Board
 public:
 
 	// C'tor
-	Board();
+	Board(Play* play);
 	~Board();
 
 	std::vector<std::vector<Piece*>> getBoard();
@@ -37,6 +38,7 @@ public:
 	bool kingCheck(bool color) const;
 
 	bool checkCheck(bool color);
+	bool checkMate(bool color);
 	bool checkLine(unsigned int startPos, unsigned int endPos, bool lineOrCol, bool color);
 	bool checkDiagonal(wxPoint dst, bool color);
 	bool checkHorse(bool color);
@@ -46,6 +48,8 @@ private:
 
 	std::vector<std::vector<Piece*>> board;
 	std::vector<King*> kings;
+
+	Play* play;
 
 
 };
