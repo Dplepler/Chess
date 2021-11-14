@@ -75,10 +75,8 @@ bool Queen::checkMove(int line, int column, Board* board)
 
 		}
 		
-		//else if (!flag)
-		//{
-		//	std::cout << "Another piece is blocking the way\n";
-		//}
+		if (i != line || i2 != column)
+			flag = false;
 	
 	
 	}
