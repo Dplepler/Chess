@@ -90,10 +90,6 @@ bool Queen::checkMove(int line, int column, Board* board)
 				flag = false;
 			}
 		}
-
-		/*if (!flag)
-			std::cout << "Another piece is blocking the way\n";*/
-
 	}
 	else if (this->column == column && this->line != line)
 	{
@@ -103,16 +99,12 @@ bool Queen::checkMove(int line, int column, Board* board)
 			{
 				flag = false;
 			}
-		}
-
-		/*if (!flag)
-			std::cout << "Another piece is blocking the way\n";*/
-		
+		}	
 	}
-	/*else
+	else
 	{
-		std::cout << "Illegal move, the Queen can't move like that";
-	}*/
+		flag = false;
+	}
 
 	return flag;
 }

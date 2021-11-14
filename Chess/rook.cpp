@@ -21,8 +21,9 @@ bool Rook::checkMove(int line, int column, Board* board)
 			}
 		}
 
-		if (!flag)
-			std::cout << "Another piece is blocking the way\n";
+		if (this->column > column ? i == column : i == line)
+			flag = false;
+
 
 	}
 	else if (this->column == column && this->line != line)
@@ -35,13 +36,10 @@ bool Rook::checkMove(int line, int column, Board* board)
 			}
 		}
 
-		if (!flag)
-			std::cout << "Another piece is blocking the way\n";
-
 	}
 	else
 	{
-		std::cout << "Illegal move, the Rook can't move like that";
+		flag = false;
 	}
 
 	return flag;
