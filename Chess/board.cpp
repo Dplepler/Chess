@@ -169,53 +169,43 @@ bool Board::checkCheck(bool color)
 
 bool Board::checkMate(bool color)
 {
+	bool flag = true;
+
 	int originalLine = this->kings[color]->getLine();
 	int originalCol = this->kings[color]->getColumn();
 
-	if (!checkCheck(color))
-		return false;
+	unsigned int i = 0;
+	unsigned int i2 = 0;
+
+	for (i = originalLine - 1; i < KING_RANGE && flag; i++)
+	{
+		for (i2 = originalCol - 1; i2 < KING_RANGE && flag; i2++)
+		{
+			this->play->makeMove(this, this->kings[color], wxPoint(i, i2));
+			if (!checkCheck(color))
+				flag = false;
+		}
+	}
+
+	this->play->makeMove(this, this->kings[color], wxPoint(originalLine, originalCol));		// Return king to previous position
 	
-	this->play->makeMove(this, this->kings[color], wxPoint(originalLine - 1, originalCol - 1));
+	
+	
+	
+	
+	
+	
+	
+	
+	return flag;
+}
 
-	if (!checkCheck(color))
-		return false;
-
-	this->play->makeMove(this, this->kings[color], wxPoint(originalLine - 1, originalCol));
-
-	if (!checkCheck(color))
-		return false;
-
-	this->play->makeMove(this, this->kings[color], wxPoint(originalLine - 1, originalCol + 1));
-
-	if (!checkCheck(color))
-		return false;
-
-	this->play->makeMove(this, this->kings[color], wxPoint(originalLine, originalCol - 1));
-
-	if (!checkCheck(color))
-		return false;
-
-	this->play->makeMove(this, this->kings[color], wxPoint(originalLine, originalCol + 1));
-
-	if (!checkCheck(color))
-		return false;
-
-	this->play->makeMove(this, this->kings[color], wxPoint(originalLine + 1, originalCol - 1));
-
-	if (!checkCheck(color))
-		return false;
-
-	this->play->makeMove(this, this->kings[color], wxPoint(originalLine + 1, originalCol));
-
-	if (!checkCheck(color))
-		return false;
-
-	this->play->makeMove(this, this->kings[color], wxPoint(originalLine + 1, originalCol + 1));
-
-	if (!checkCheck(color))
-		return false;
-
-	return true;
+// TODO: this function should check which pieces (of a certain color) can go to a certain location
+std::vector<Piece*> Board::validDestPieces(wxPoint dst, bool color)
+{
+	std::vector<Piece*> pieces;
+	return pieces;
+	
 }
 
 bool Board::checkLine(unsigned int startPos, unsigned int endPos, bool lineOrCol, bool color)

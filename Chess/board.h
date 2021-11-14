@@ -21,6 +21,7 @@ class Play;
 #define PIECES 32
 
 #define TWICE 2
+#define KING_RANGE 3
 
 class Board
 {
@@ -34,6 +35,7 @@ public:
 	std::vector<std::vector<Piece*>> getBoard();
 
 	void updateBoard(int line, int col, Piece* piece);
+	std::vector<Piece*> validDestPieces(wxPoint dst, bool color);
 	Piece* getPiece(int line, int col) const;
 	bool kingCheck(bool color) const;
 
