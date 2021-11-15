@@ -145,7 +145,7 @@ std::vector<Piece*> Board::checkCheck(bool color)
 
 	bool flag = false;
 
-	unsigned int i = 0;
+	int i = 0;
 
 	// If all the possible checks aren't happening, then the king is not in check
 	pieces.push_back(this->checkLine(this->kings[color]->getLine() + 1, BOARD_HEIGHT - this->kings[color]->getLine() - 1, this->kings[color]->getColumn(), color));		// Check right line
@@ -163,6 +163,7 @@ std::vector<Piece*> Board::checkCheck(bool color)
 		if (!pieces[i])
 		{
 			pieces.erase(pieces.begin() + i);
+			i--;
 		}
 	}
 	
@@ -177,8 +178,6 @@ bool Board::checkMate(bool color)
 	bool flag = true;
 
 	std::vector<Piece*> pieces;
-
-	unsigned int i = 0;
 
 	int originalLine = this->kings[color]->getLine();
 	int originalCol = this->kings[color]->getColumn();
@@ -210,7 +209,7 @@ bool Board::checkMate(bool color)
 	pieces = checkCheck(color);
 
 	if (!pieces.size())
-		flag = false;
+		return false;
 
 	for (i = originalLine - 1; i < KING_RANGE && flag; i++)
 	{

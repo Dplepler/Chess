@@ -37,12 +37,12 @@ bool Play::makeMove(Board* board, Piece* piece, wxPoint dst)
 		piece->updateCoords(dst.y, dst.x);
 		
 		// If the player's king is in check after his move, the move is invalid
-		if (board->checkCheck(piece->getColor()))
+		if (board->checkCheck(piece->getColor()).size() > 0)
 		{
 			board->updateBoard(prevLine, prevCol, piece);
 			piece->updateCoords(prevLine, prevCol);
 			flag = true;
-		}
+		}	
 	}
 	else
 	{

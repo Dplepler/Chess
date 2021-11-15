@@ -172,10 +172,8 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
         this->play->switchMove();
     }
 
-    if (this->board->checkMate(piece->getColor()))
-    {
-        drawText(wxPoint(0, 20), std::string("Checkmate!\n"));
-    }
+    if (this->board->checkMate(!piece->getColor()))
+        this->gameOver();
 
 
  
@@ -217,4 +215,10 @@ void wxImagePanel::deleteImage(Piece* piece)
         this->coords.erase(prevIndexIt);
         this->images.erase(prevBitmapIt);
     }
+}
+
+void wxImagePanel::gameOver() 
+{
+    this->drawText(wxPoint(0, 20), std::string("Checkmate!\n"));
+
 }
