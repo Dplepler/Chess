@@ -39,11 +39,11 @@ public:
 	Piece* getPiece(int line, int col) const;
 	bool kingCheck(bool color) const;
 
-	bool checkCheck(bool color);
+	std::vector<Piece*> checkCheck(bool color);
 	bool checkMate(bool color);
-	bool checkLine(unsigned int startPos, unsigned int endPos, bool lineOrCol, bool color);
-	bool checkDiagonal(wxPoint dst, bool color);
-	bool checkHorse(bool color);
+	Piece* checkLine(unsigned int startPos, unsigned int endPos, bool lineOrCol, bool color);
+	Piece* checkDiagonal(wxPoint dst, bool color);
+	void checkHorse(bool color, std::vector<Piece*>& pieces);
 	
 
 private:
