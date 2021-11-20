@@ -261,8 +261,8 @@ bool Board::checkMate(bool color)
 
 		if (path == PATH::DIAGONAL)
 		{
-			yDir == YDIR::DOWN ? i = kingLine + 1 : i = kingLine - 1;
-			xDir == XDIR::RIGHT ? i2 = kingCol + 1 : i2 = kingCol - 1;
+			i = yDir == YDIR::DOWN ? kingLine + 1 : kingLine - 1;
+			i2 = xDir == XDIR::RIGHT ? kingCol + 1 : kingCol - 1;
 
 			while ((yDir == YDIR::DOWN ? i <= dstLine : i >= dstLine) && (xDir == XDIR::RIGHT ? i2 <= dstCol : i2 >= dstCol) && flag)
 			{
@@ -276,7 +276,7 @@ bool Board::checkMate(bool color)
 		else if (kingLine == dstLine && kingCol != dstCol)
 		{
 			
-			for (xDir == XDIR::RIGHT ? i = kingCol + 1 : i = dstCol; flag && xDir == XDIR::RIGHT ? i <= dstCol : i < kingCol; i++)
+			for (i = xDir == XDIR::RIGHT ? kingCol + 1 : dstCol; flag && xDir == XDIR::RIGHT ? i <= dstCol : i < kingCol; i++)
 			{
 				if (this->validDestPieces(wxPoint(i2, i), color).size() > 0)	// Check if there's a piece that can block the check's way
 					flag = false;
@@ -284,7 +284,7 @@ bool Board::checkMate(bool color)
 		}
 		else if (kingCol == dstCol && kingLine != dstLine)
 		{
-			for (yDir == YDIR::DOWN ? i = kingLine + 1 : i = dstLine; flag && yDir == YDIR::DOWN ? i <= dstLine : i < kingLine; i++)
+			for (i = yDir == YDIR::DOWN ? kingLine + 1 : dstLine; flag && yDir == YDIR::DOWN ? i <= dstLine : i < kingLine; i++)
 			{
 				if (this->validDestPieces(wxPoint(i2, i), color).size() > 0)	// Check if there's a piece that can block the check's way
 					flag = false;
@@ -365,11 +365,11 @@ Piece* Board::checkDiagonal(wxPoint dst, bool color)
 	YDIR yDir;
 	XDIR xDir;
 
-	dst.y > this->kings[color]->getLine() ? yDir = YDIR::DOWN : yDir = YDIR::UP;
-	dst.x > this->kings[color]->getColumn() ? xDir = XDIR::RIGHT : xDir = XDIR::LEFT;
+	yDir = dst.y > this->kings[color]->getLine() ? YDIR::DOWN : YDIR::UP;
+	xDir = dst.x > this->kings[color]->getColumn() ? XDIR::RIGHT : XDIR::LEFT;
 
-	yDir == YDIR::DOWN ? i = this->kings[color]->getLine() + 1 : i = this->kings[color]->getLine() - 1;
-	xDir == XDIR::RIGHT ? i2 = this->kings[color]->getColumn() + 1 : i2 = this->kings[color]->getColumn() - 1;
+	i = yDir == YDIR::DOWN ? this->kings[color]->getLine() + 1 : this->kings[color]->getLine() - 1;
+	i2 = xDir == XDIR::RIGHT ? this->kings[color]->getColumn() + 1 : this->kings[color]->getColumn() - 1;
 
 	do
 	{
@@ -380,8 +380,8 @@ Piece* Board::checkDiagonal(wxPoint dst, bool color)
 			// If piece is not a king, then it for sure threatens our king, otherwise if it is a king, check that he is 1 block close to
 			// our king
 			if (piece->id != ID::ID_KING || 
-				((yDir == YDIR::DOWN ? i == this->kings[color]->getLine() + 1 : i == this->kings[color]->getLine() - 1)
-					&& (xDir == XDIR::RIGHT ? i2 == this->kings[color]->getColumn() + 1 : i2 == this->kings[color]->getColumn() - 1)))
+				((i == (yDir == YDIR::DOWN ? this->kings[color]->getLine() + 1 : this->kings[color]->getLine() - 1))
+					&& (i2 == (xDir == XDIR::RIGHT ? this->kings[color]->getColumn() + 1 : this->kings[color]->getColumn() - 1))))
 			{
 				this->kings[color]->setCheck(true);
 			}
