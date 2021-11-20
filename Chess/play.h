@@ -19,6 +19,8 @@ public:
 	Play();
 	~Play();
 
+	bool gameOver;
+
 	bool isSelectOrMove() const;
 
 	void setSelectOrMove(bool flag);
@@ -32,7 +34,7 @@ private:
 
 	bool turn;
 	bool selectOrMove;
-	bool gameOver;
+
 
 };
 

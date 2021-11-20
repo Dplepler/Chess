@@ -19,9 +19,8 @@ wxImagePanel::wxImagePanel(wxFrame* parent, Board* board, Play* play) :
  * calling Refresh()/Update().
  */
 void wxImagePanel::paintEvent(wxPaintEvent &evt)
-{
+{  
     // depending on your system you may need to look at double-buffered dcs
-
     wxPaintDC dc(this);
     
     render(dc);
@@ -100,6 +99,9 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     wxPoint pt = wxGetMousePosition();
     pt = this->window->ScreenToClient(pt);  // Move the mouse position to become relative to the window
 
+    if (this->play->gameOver)
+        return;
+
     unsigned int i = 0;
 
     int moveX = 0;
@@ -173,10 +175,12 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     }
 
     if (this->board->checkMate(!piece->getColor()))
-        this->gameOver();
+    {
+        this->drawText(wxPoint(0, 20), std::string("Checkmate!\n"));
+        this->play->gameOver = true;
+        return;
+    }
 
-
- 
     // Calculate amount of pixels to move
     moveX = piece->getColumn() * 75 + 170;
     moveY = piece->getLine() * 75 + 55;
@@ -215,10 +219,4 @@ void wxImagePanel::deleteImage(Piece* piece)
         this->coords.erase(prevIndexIt);
         this->images.erase(prevBitmapIt);
     }
-}
-
-void wxImagePanel::gameOver() 
-{
-    this->drawText(wxPoint(0, 20), std::string("Checkmate!\n"));
-
 }

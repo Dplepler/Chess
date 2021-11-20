@@ -40,7 +40,6 @@ private:
     Board* board;
     Play* play;
 
-    void gameOver();
     
 };
 

@@ -311,9 +311,9 @@ std::vector<Piece*> Board::validDestPieces(wxPoint dst, bool color)
 	// Push all pieces that can go to the specified location
 	for (i = 0; i < BOARD_HEIGHT; i++)
 	{
-		for (i2 = 0; i2 < BOARD_WIDTH; i++)
+		for (i2 = 0; i2 < BOARD_WIDTH; i2++)
 		{
-			if (this->board[i][i2] && this->board[i][i2]->checkMove(dst.y, dst.x, this))
+			if (this->board[i][i2] && this->board[i][i2]->getColor() == color && this->board[i][i2]->checkMove(dst.y, dst.x, this))
 			{
 				validPieces.push_back(this->board[i][i2]);
 			}
