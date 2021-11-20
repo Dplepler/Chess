@@ -23,6 +23,9 @@ class Play;
 #define TWICE 2
 #define KING_RANGE 3
 
+#define LINE 1
+#define COL 0
+
 class Board
 {
 

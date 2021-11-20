@@ -148,14 +148,14 @@ std::vector<Piece*> Board::checkCheck(bool color)
 	int i = 0;
 
 	// If all the possible checks aren't happening, then the king is not in check
-	pieces.push_back(this->checkLine(this->kings[color]->getLine() + 1, BOARD_HEIGHT - this->kings[color]->getLine() - 1, this->kings[color]->getColumn(), color));		// Check right line
-	pieces.push_back(this->checkLine(this->kings[color]->getColumn() + 1, BOARD_HEIGHT - this->kings[color]->getColumn() - 1, this->kings[color]->getLine(), color));	// Check right column
-	pieces.push_back(this->checkLine(0, this->kings[color]->getLine(), this->kings[color]->getColumn(), color));														// Check left line
-	pieces.push_back(this->checkLine(0, this->kings[color]->getColumn(), this->kings[color]->getLine(), color));														// Check left column
-	pieces.push_back(this->checkDiagonal(wxPoint(0, 0), color));														// Left lower corner
-	pieces.push_back(this->checkDiagonal(wxPoint(0, BOARD_HEIGHT), color));												// left upper corner
-	pieces.push_back(this->checkDiagonal(wxPoint(BOARD_WIDTH, BOARD_HEIGHT), color));									// Right upper corner
-	pieces.push_back(this->checkDiagonal(wxPoint(BOARD_WIDTH, 0), color));												// Right lower corner
+	pieces.push_back(this->checkLine(this->kings[color]->getLine() + 1, BOARD_HEIGHT - 1, LINE, color));	// Check bottom line
+	pieces.push_back(this->checkLine(this->kings[color]->getColumn() + 1, BOARD_WIDTH - 1, COL, color));	// Check right line
+	pieces.push_back(this->checkLine(0, this->kings[color]->getLine() - 1, LINE, color));					// Check upper line
+	pieces.push_back(this->checkLine(0, this->kings[color]->getColumn() - 1, COL, color));					// Check left line
+	pieces.push_back(this->checkDiagonal(wxPoint(0, 0), color));											// Left lower corner
+	pieces.push_back(this->checkDiagonal(wxPoint(0, BOARD_HEIGHT), color));									// left upper corner
+	pieces.push_back(this->checkDiagonal(wxPoint(BOARD_WIDTH, BOARD_HEIGHT), color));						// Right lower corner
+	pieces.push_back(this->checkDiagonal(wxPoint(BOARD_WIDTH, 0), color));									// Right upper corner
 	this->checkHorse(color, pieces);
 
 	for (i = 0; i < pieces.size(); i++)
@@ -211,11 +211,15 @@ bool Board::checkMate(bool color)
 	if (!pieces.size())
 		return false;
 
-	for (i = originalLine - 1; i < KING_RANGE && flag; i++)
+	for (i = originalLine - 1; i < originalLine + KING_RANGE && i < BOARD_HEIGHT && flag; i++)
 	{
-		for (i2 = originalCol - 1; i2 < KING_RANGE && flag; i2++)
+		for (i2 = originalCol - 1; i2 < originalCol + KING_RANGE && i < BOARD_HEIGHT && flag; i2++)
 		{
-			this->play->makeMove(this, this->kings[color], wxPoint(i, i2));
+			// If another piece is blocking the way
+			if (!this->play->checkValidDest(this, this->kings[color], wxPoint(i2, i)))
+				continue;
+
+			this->play->makeMove(this, this->kings[color], wxPoint(i2, i));
 			if (!checkCheck(color).size())
 				flag = false;
 		}
@@ -326,7 +330,7 @@ Piece* Board::checkLine(unsigned int startPos, unsigned int endPos, bool lineOrC
 
 	for (i = startPos; i <= endPos; i++)
 	{
-		lineOrCol ? piece = this->getPiece(this->kings[color]->getLine(), i) : this->getPiece(i, this->kings[color]->getColumn());
+		piece = lineOrCol ? this->getPiece(i, this->kings[color]->getColumn()) : this->getPiece(this->kings[color]->getLine(), i);
 
 		if (piece && piece->getColor() != color && (piece->id == ID::ID_ROOK || piece->id == ID::ID_QUEEN || piece->id == ID::ID_KING))
 		{
