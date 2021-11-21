@@ -66,12 +66,5 @@ bool Play::checkValidSrc(Board* board, Piece* piece)
 
 bool Play::checkValidDest(Board* board, Piece* piece, wxPoint coords)
 {
-	bool flag = true;;
-
-	if (board->getBoard()[coords.y][coords.x] && board->getBoard()[coords.y][coords.x]->getColor() == piece->getColor())
-	{
-		flag = false;
-	}
-
-	return flag;
+	return !(board->getBoard()[coords.y][coords.x] && board->getBoard()[coords.y][coords.x]->getColor() == piece->getColor());
 }

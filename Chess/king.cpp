@@ -42,12 +42,12 @@ bool King::checkMove(int line, int column, Board* board)
 	// If the king is in check after the move, then it is invalid
 	if (board->checkCheck(this->color).size() > 0)
 	{
-		this->line = prevLine;
-		this->column = prevColumn;
 		this->check = false;
 		flag = false;
 	}
 	
+	this->line = prevLine;
+	this->column = prevColumn;
 
 	return flag;
 }

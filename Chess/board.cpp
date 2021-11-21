@@ -125,17 +125,7 @@ void Board::updateBoard(int line, int col, Piece* piece)
 
 Piece* Board::getPiece(int line, int col) const
 {
-	Piece* piece = nullptr;
-
-	if (line < BOARD_HEIGHT && line >= 0 && col < BOARD_WIDTH && col >= 0)
-	{
-		if (board[line][col])
-		{
-			piece = this->board[line][col];
-		}
-	}
-
-	return piece;
+	return line < BOARD_HEIGHT && line >= 0 && col < BOARD_WIDTH&& col >= 0 ? this->board[line][col] : nullptr;
 }
 
 std::vector<Piece*> Board::checkCheck(bool color)
@@ -179,8 +169,8 @@ bool Board::checkMate(bool color)
 
 	std::vector<Piece*> pieces;
 
-	int originalLine = this->kings[color]->getLine();
-	int originalCol = this->kings[color]->getColumn();
+	int kingLine = this->kings[color]->getLine();
+	int kingCol = this->kings[color]->getColumn();
 
 	unsigned int i = 0;
 	unsigned int i2 = 0;
@@ -211,28 +201,30 @@ bool Board::checkMate(bool color)
 	if (!pieces.size())
 		return false;
 
-	for (i = originalLine - 1; i < originalLine + KING_RANGE && i < BOARD_HEIGHT && flag; i++)
+	for (i = kingLine - 1; i < kingLine - 1 + KING_RANGE && i < BOARD_HEIGHT && flag; i++)
 	{
-		for (i2 = originalCol - 1; i2 < originalCol + KING_RANGE && i < BOARD_HEIGHT && flag; i2++)
+		for (i2 = kingCol - 1; i2 < kingCol - 1 + KING_RANGE && i < BOARD_HEIGHT && flag; i2++)
 		{
 			// If another piece is blocking the way
 			if (!this->play->checkValidDest(this, this->kings[color], wxPoint(i2, i)))
 				continue;
 
-			this->play->makeMove(this, this->kings[color], wxPoint(i2, i));
-			if (!checkCheck(color).size())
+			// If king is not in check after move, then there is no checkmate
+			if (!this->play->makeMove(this, this->kings[color], wxPoint(i2, i)))
 				flag = false;
 		}
 	}
 
-	this->play->makeMove(this, this->kings[color], wxPoint(originalLine, originalCol));		// Return king to the first position
+	// Return king to the first position
+	this->updateBoard(kingLine, kingCol, this->kings[color]);
+	this->kings[color]->updateCoords(kingLine, kingCol);
 
+	if (!flag)
+		return flag;
 
 	int dstLine = pieces[0]->getLine();
 	int dstCol = pieces[0]->getColumn();
 
-	int kingLine = this->kings[color]->getLine();
-	int kingCol = this->kings[color]->getColumn();
 
 	// If only one piece is threatening the king and the king cannot escape, check if we can block it, or if we can eat it
 	if (pieces.size() == 1)
@@ -255,10 +247,8 @@ bool Board::checkMate(bool color)
 			xDir = XDIR::LEFT;
 		}
 
-
-		kingLine != dstLine && kingCol != dstCol ? path = PATH::DIAGONAL : path = PATH::STRAIGHT;
+		path = kingLine != dstLine && kingCol != dstCol ? PATH::DIAGONAL : PATH::STRAIGHT;
 		  
-
 		if (path == PATH::DIAGONAL)
 		{
 			i = yDir == YDIR::DOWN ? kingLine + 1 : kingLine - 1;
@@ -278,7 +268,7 @@ bool Board::checkMate(bool color)
 			
 			for (i = xDir == XDIR::RIGHT ? kingCol + 1 : dstCol; flag && xDir == XDIR::RIGHT ? i <= dstCol : i < kingCol; i++)
 			{
-				if (this->validDestPieces(wxPoint(i2, i), color).size() > 0)	// Check if there's a piece that can block the check's way
+				if (this->validDestPieces(wxPoint(kingCol, i), color).size() > 0)	// Check if there's a piece that can block the check's way
 					flag = false;
 			}
 		}
@@ -286,7 +276,7 @@ bool Board::checkMate(bool color)
 		{
 			for (i = yDir == YDIR::DOWN ? kingLine + 1 : dstLine; flag && yDir == YDIR::DOWN ? i <= dstLine : i < kingLine; i++)
 			{
-				if (this->validDestPieces(wxPoint(i2, i), color).size() > 0)	// Check if there's a piece that can block the check's way
+				if (this->validDestPieces(wxPoint(i, kingLine), color).size() > 0)	// Check if there's a piece that can block the check's way
 					flag = false;
 			}
 		}
@@ -334,12 +324,14 @@ Piece* Board::checkLine(unsigned int startPos, unsigned int endPos, bool lineOrC
 
 		if (piece && piece->getColor() != color && (piece->id == ID::ID_ROOK || piece->id == ID::ID_QUEEN || piece->id == ID::ID_KING))
 		{
-			this->kings[color]->setCheck(true);
-
 			// If the other king is in the line, check that it's 1 block away, otherwise it's not a check
-			if (piece->id == ID::ID_KING && i != 1)
+			if (piece->id == ID::ID_KING && abs(i - lineOrCol ? this->kings[color]->getLine() : this->kings[color]->getColumn()))
 			{
 				piece = nullptr;
+			}
+			else
+			{
+				this->kings[color]->setCheck(true);
 			}
 
 			break;
