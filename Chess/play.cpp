@@ -31,37 +31,28 @@ bool Play::makeMove(Board* board, Piece* piece, wxPoint dst)
 
 	this->selectOrMove = SELECT;
 
-	if (piece->checkMove(dst.y, dst.x, board))
-	{
-		board->updateBoard(dst.y, dst.x, piece);
-		piece->updateCoords(dst.y, dst.x);
+	if (!piece->checkMove(dst.y, dst.x, board)) {
+		return true;
+	}
+
+	board->updateBoard(dst.y, dst.x, piece);
+	piece->updateCoords(dst.y, dst.x);
 		
-		// If the player's king is in check after his move, the move is invalid
-		if (board->checkCheck(piece->getColor()).size() > 0)
-		{
-			board->updateBoard(prevLine, prevCol, piece);
-			piece->updateCoords(prevLine, prevCol);
-			flag = true;
-		}	
-	}
-	else
+	// If the player's king is in check after his move, the move is invalid
+	if (board->checkCheck(piece->getColor()).size() > 0)
 	{
+		board->updateBoard(prevLine, prevCol, piece);
+		piece->updateCoords(prevLine, prevCol);
 		flag = true;
-	}
+	}	
+
 
 	return flag;
 }
 
 bool Play::checkValidSrc(Board* board, Piece* piece)
 {
-	bool flag = true;
-
-	if ((piece->getColor() == WHITE && this->turn == BLACK) || (piece->getColor() == BLACK && this->turn == WHITE))
-	{
-		flag = false;
-	}
-
-	return flag;
+	return !((piece->getColor() == WHITE && this->turn == BLACK) || (piece->getColor() == BLACK && this->turn == WHITE));
 }
 
 bool Play::checkValidDest(Board* board, Piece* piece, wxPoint coords)
