@@ -297,7 +297,7 @@ std::vector<Piece*> Board::validDestPieces(wxPoint dst, bool color)
 	unsigned int i2 = 0;
 
 	std::vector<Piece*> validPieces;
-
+	  
 	// Push all pieces that can go to the specified location
 	for (i = 0; i < BOARD_HEIGHT; i++)
 	{
