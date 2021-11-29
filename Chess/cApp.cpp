@@ -7,11 +7,6 @@ cApp::~cApp() {}
 
 bool cApp::OnInit()
 {
-	unsigned int i = 0;
-	unsigned int i2 = 0;
-
-	int x = 0;
-	int y = 0;
 
 	size_t size = 0;
 	std::string str;
@@ -37,12 +32,17 @@ bool cApp::OnInit()
 	image = new wxBitmap(*img);
 	drawPane->addImage(image, wxPoint(170, 55));
 
-	for (i = 0; i < BOARD_HEIGHT; i++)
+	int x = 0;
+	int y = 0;
+
+	for (unsigned int i = 0; i < BOARD_HEIGHT; i++)
 	{
-		for (i2 = 0; i2 < BOARD_WIDTH; i2++)
+		for (unsigned int i2 = 0; i2 < BOARD_WIDTH; i2++)
 		{
-			if (!board->getBoard()[i][i2])
+			if (!board->getBoard()[i][i2]) {
 				continue;
+			}
+				
 			
 			x = board->getBoard()[i][i2]->getColumn() * 75 + 170;
 			y = board->getBoard()[i][i2]->getLine() * 75 + 55;
