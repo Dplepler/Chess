@@ -11,15 +11,11 @@
 
 Board::Board(Play* play)
 {
-	unsigned int i = 0;
-	unsigned int i2 = 0;
-
 	bool color = false;
 
 	wxImage* img = nullptr;
 	wxBitmap* image = nullptr;
 	std::string file;
-
 	King* king = nullptr;
 
 	size_t boardSize = BOARD_HEIGHT * BOARD_WIDTH;
@@ -39,17 +35,18 @@ Board::Board(Play* play)
 	img = new wxImage(100, 100);
 	
 
-	for (i = 0; i < BOARD_HEIGHT; i++)
+	for (unsigned int i = 0; i < BOARD_HEIGHT; i++)
 	{
 		image = new wxBitmap(*img);
 
 		// After two lines, switch to the black pieces
-		if (color == WHITE && i > TWICE)
+		if (color == WHITE && i > TWICE) {
 			color = BLACK;
+		}
 
 		this->board.push_back(std::vector<Piece*>());
 
-		for (i2 = 0; i2 < BOARD_WIDTH; i2++)
+		for (unsigned int i2 = 0; i2 < BOARD_WIDTH; i2++)
 		{
 			
 			// Push all pieces onto the board, for places with no piece, push a null pointer
@@ -148,21 +145,26 @@ std::vector<Piece*> Board::checkCheck(bool color)
 	pieces.push_back(this->checkDiagonal(wxPoint(BOARD_WIDTH, 0), color));									// Right upper corner
 	this->checkHorse(color, pieces);
 
-	for (i = 0; i < pieces.size(); i++)
+	while (i < pieces.size())
 	{
-		if (!pieces[i])
+		if (!pieces[i]) 
 		{
 			pieces.erase(pieces.begin() + i);
-			i--;
+		}
+		else 
+		{
+			i++;
 		}
 	}
 	
-	if (!pieces.size())
+	if (!pieces.size()) {
 		this->kings[color]->setCheck(false);
-
+	}
+		
 	return pieces;
 }
 
+// TODO: CLEAN THIS SHIT MORE
 bool Board::checkMate(bool color)
 {
 	bool flag = true;
@@ -198,8 +200,10 @@ bool Board::checkMate(bool color)
 
 	pieces = checkCheck(color);
 
-	if (!pieces.size())
+	if (!pieces.size()) {
 		return false;
+	}
+		
 
 	for (i = kingLine - 1; i < kingLine - 1 + KING_RANGE && i < BOARD_HEIGHT && flag; i++)
 	{
