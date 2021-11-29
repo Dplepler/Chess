@@ -36,7 +36,6 @@ void wxImagePanel::paintEvent(wxPaintEvent &evt)
  */
 void wxImagePanel::paintNow()
 {
-    
     // depending on your system you may need to look at double-buffered dcs
     wxClientDC dc(this);
     render(dc);
@@ -49,11 +48,9 @@ void wxImagePanel::paintNow()
  */
 void wxImagePanel::render(wxDC &dc)
 {
-    unsigned int i = 0;
     size_t size = this->images.size();
     
-    for (i = 0; i < size; i++)
-    {
+    for (unsigned int i = 0; i < size; i++) {
         dc.DrawBitmap(*images[i], coords[i].x, coords[i].y, false);
     }
 
@@ -64,19 +61,16 @@ void wxImagePanel::addImage(wxBitmap* img, wxPoint coords)
 {
     this->images.push_back(img);
     this->coords.push_back(coords);
-
 }
 
 int wxImagePanel::searchImage(wxBitmap* img) const
 {
     size_t size = this->coords.size();
-    unsigned int i = 0;
     int index = -1;
 
-    for (i = 0; i < size && index == -1; i++)
+    for (unsigned int i = 0; i < size && index == -1; i++)
     {
-        if (this->images[i] == img)
-        {
+        if (this->images[i] == img) {
             index = i;
         }
     }
@@ -99,9 +93,10 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     wxPoint pt = wxGetMousePosition();
     pt = this->window->ScreenToClient(pt);  // Move the mouse position to become relative to the window
 
-    if (this->play->gameOver)
+    if (this->play->gameOver) {
         return;
-
+    }
+        
     unsigned int i = 0;
 
     int moveX = 0;
@@ -139,15 +134,16 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
         else
         {
             this->play->setSelectOrMove(MOVE);
-            
         } 
 
         return;
     }
        
     // Exit if there's no piece
-    if (!piece)
+    if (!piece) {
         return;
+    }
+        
 
     /* Everything from here is for piece movement */
     
@@ -169,10 +165,9 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
 
         return;
     }
-    else
-    {
-        this->play->switchMove();
-    }
+    
+    this->play->switchMove();
+    
 
     if (this->board->checkMate(!piece->getColor()))
     {
@@ -189,7 +184,6 @@ void wxImagePanel::mouseDown(wxMouseEvent& event)
     if (this->searchImage(piece->getImage()) > -1)
     {       
         this->deleteImage(prevPiece);
-
         this->coords[this->searchImage(piece->getImage())] = wxPoint(moveX, moveY);
     }
             
