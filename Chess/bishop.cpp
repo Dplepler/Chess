@@ -3,15 +3,10 @@
 Bishop::Bishop(int line, int column, bool color, wxBitmap* image) : Piece(line, column, color, image)
 {
 	this->id = ID::ID_BISHOP;
-
 }
 
 bool Bishop::checkMove(int line, int column, Board* board)
 {
-	unsigned int i = 0;
-	unsigned int i2 = 0;
-	bool flag = true;
-
 	enum class XDIR
 	{
 		LEFT,
@@ -27,20 +22,23 @@ bool Bishop::checkMove(int line, int column, Board* board)
 	} yDir;
 	
 	// If the piece didn't move; for Bishop if one of the params didn't change we already know it didn't move
-	if (this->line == line || this->column == column)
+	if (this->line == line || this->column == column) {
 		return false;
+	}
+		
+	yDir = (line > this->line) ? YDIR::DOWN : YDIR::UP;
+	xDir = (column > this->column) ? XDIR::RIGHT : XDIR::LEFT;
 
-	line > this->line ? yDir = YDIR::DOWN : yDir = YDIR::UP;
-	column > this->column ? xDir = XDIR::RIGHT : xDir = XDIR::LEFT;
+	unsigned int i = 0;
+	unsigned int i2 = 0;
 
 	yDir == YDIR::DOWN ? i = this->line + 1 : i = this->line - 1;
 	xDir == XDIR::RIGHT ? i2 = this->column + 1 : i2 = this->column - 1;
 
-	while ((yDir == YDIR::DOWN ? i < line : i > line) && (xDir == XDIR::RIGHT ? i2 < column : i2 > column) && flag)
+	while ((yDir == YDIR::DOWN ? i < line : i > line) && (xDir == XDIR::RIGHT ? i2 < column : i2 > column))
 	{
-		if (board->getBoard()[i][i2])
-		{
-			flag = false;
+		if (board->getBoard()[i][i2]) {
+			break;
 		}
 
 		yDir == YDIR::DOWN ? i++ : i--;
@@ -48,11 +46,6 @@ bool Bishop::checkMove(int line, int column, Board* board)
 
 	} 
 
-	if (i != line || i2 != column)
-		flag = false;
-
-
-
-	return flag;
+	return !(i != line || i2 != column);
 }
 
