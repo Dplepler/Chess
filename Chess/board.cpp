@@ -210,12 +210,13 @@ bool Board::checkMate(bool color)
 		for (i2 = kingCol - 1; i2 < kingCol - 1 + KING_RANGE && i < BOARD_HEIGHT && flag; i2++)
 		{
 			// If another piece is blocking the way
-			if (!this->play->checkValidDest(this, this->kings[color], wxPoint(i2, i)))
+			if (!this->play->checkValidDest(this, this->kings[color], wxPoint(i2, i))) {
 				continue;
-
+			}
+				
 			// If king is not in check after move, then there is no checkmate
-			if (!this->play->makeMove(this, this->kings[color], wxPoint(i2, i)))
-				flag = false;
+			flag = this->play->makeMove(this, this->kings[color], wxPoint(i2, i));
+
 		}
 	}
 
