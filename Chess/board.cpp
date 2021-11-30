@@ -224,12 +224,13 @@ bool Board::checkMate(bool color)
 	this->updateBoard(kingLine, kingCol, this->kings[color]);
 	this->kings[color]->updateCoords(kingLine, kingCol);
 
-	if (!flag)
+	if (!flag) {
 		return flag;
+	}
+		
 
 	int dstLine = pieces[0]->getLine();
 	int dstCol = pieces[0]->getColumn();
-
 
 	// If only one piece is threatening the king and the king cannot escape, check if we can block it, or if we can eat it
 	if (pieces.size() == 1)
@@ -261,9 +262,8 @@ bool Board::checkMate(bool color)
 
 			while ((yDir == YDIR::DOWN ? i <= dstLine : i >= dstLine) && (xDir == XDIR::RIGHT ? i2 <= dstCol : i2 >= dstCol) && flag)
 			{
-				if (this->validDestPieces(wxPoint(i2, i), color).size() > 0)	// Check if there's a piece that can block the check's way
-					flag = false;
-
+				flag = !this->validDestPieces(wxPoint(i2, i), color).size() > 0;	// Check if there's a piece that can block the check's way
+				
 				yDir == YDIR::DOWN ? i++ : i--;
 				xDir == XDIR::RIGHT ? i2++ : i2--;
 			}
@@ -273,8 +273,7 @@ bool Board::checkMate(bool color)
 			
 			for (i = xDir == XDIR::RIGHT ? kingCol + 1 : dstCol; flag && xDir == XDIR::RIGHT ? i <= dstCol : i < kingCol; i++)
 			{
-				if (this->validDestPieces(wxPoint(kingCol, i), color).size() > 0)	// Check if there's a piece that can block the check's way
-					flag = false;
+				flag = !this->validDestPieces(wxPoint(kingCol, i), color).size() > 0;	// Check if there's a piece that can block the check's way
 			}
 		}
 		else if (kingCol == dstCol && kingLine != dstLine)
