@@ -271,8 +271,7 @@ bool Board::checkMate(bool color)
 		else if (kingLine == dstLine && kingCol != dstCol)
 		{
 			
-			for (i = xDir == XDIR::RIGHT ? kingCol + 1 : dstCol; flag && xDir == XDIR::RIGHT ? i <= dstCol : i < kingCol; i++)
-			{
+			for (i = xDir == XDIR::RIGHT ? kingCol + 1 : dstCol; flag && xDir == XDIR::RIGHT ? i <= dstCol : i < kingCol; i++) {
 				flag = !this->validDestPieces(wxPoint(kingCol, i), color).size() > 0;	// Check if there's a piece that can block the check's way
 			}
 		}
@@ -280,8 +279,7 @@ bool Board::checkMate(bool color)
 		{
 			for (i = yDir == YDIR::DOWN ? kingLine + 1 : dstLine; flag && yDir == YDIR::DOWN ? i <= dstLine : i < kingLine; i++)
 			{
-				if (this->validDestPieces(wxPoint(i, kingLine), color).size() > 0)	// Check if there's a piece that can block the check's way
-					flag = false;
+				flag = !this->validDestPieces(wxPoint(i, kingLine), color).size() > 0;	// Check if there's a piece that can block the check's way
 			}
 		}
 		else
@@ -307,8 +305,7 @@ std::vector<Piece*> Board::validDestPieces(wxPoint dst, bool color)
 	{
 		for (i2 = 0; i2 < BOARD_WIDTH; i2++)
 		{
-			if (this->board[i][i2] && this->board[i][i2]->id != ID::ID_KING && this->board[i][i2]->getColor() == color && this->board[i][i2]->checkMove(dst.y, dst.x, this))
-			{
+			if (this->board[i][i2] && this->board[i][i2]->id != ID::ID_KING && this->board[i][i2]->getColor() == color && this->board[i][i2]->checkMove(dst.y, dst.x, this)) {
 				validPieces.push_back(this->board[i][i2]);
 			}
 		}
@@ -407,7 +404,7 @@ Piece* Board::checkDiagonal(wxPoint dst, bool color)
 	} while ((yDir == YDIR::DOWN ? i < dst.y : i > dst.y) && (xDir == XDIR::RIGHT ? i2 < dst.x : i2 > dst.x));
 
 	return piece;
-}
+} 
 
 void Board::checkHorse(bool color, std::vector<Piece*>& pieces)
 {
