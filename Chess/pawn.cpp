@@ -23,7 +23,7 @@ bool Pawn::checkMove(int line, int column, Board* board)
 	// to move to the sides
 	if (lineMovement == TWO && !columnMovement)
 	{
-		flag = !(collidingPiece && this->column == column && (this->color == WHITE && this->line == WHITE_PAWN_POS) || (this->color == BLACK && this->line == BLACK_PAWN_POS));
+		flag = !collidingPiece && this->column == column && (this->color == WHITE && this->line == WHITE_PAWN_POS) || (this->color == BLACK && this->line == BLACK_PAWN_POS);
 	}
 	// If there was no horizontal movement or it was just one square, then we are okay
 	else if (lineMovement == 1 && !columnMovement && !collidingPiece)

@@ -15,25 +15,18 @@ bool Rook::checkMove(int line, int column, Board* board)
 
 		for (i = this->column > column ? this->column + 1 : column + 1; flag && i < (this->column > column) ?  column : this->column; i++)
 		{
-			if (board->getBoard()[line][i]) {
-				flag = false;
-			}
+			flag = !board->getBoard()[line][i];
 		}
 
 		if (i == (this->column > column) ? column : line) {
 			flag = false;
 		}
-			
-
-
 	}
 	else if (this->column == column && this->line != line)
 	{
 		for (i = line > this->line ? this->line + 1 : line + 1; flag && i < (line > this->line) ? line : this->line; i++)
 		{
-			if (board->getBoard()[i][column]) {
-				flag = false;
-			}
+			flag = !board->getBoard()[i][column];
 		}
 
 	}
