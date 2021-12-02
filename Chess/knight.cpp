@@ -12,20 +12,14 @@ bool Knight::checkMove(int line, int column, Board* board)
 	float lineMovement = abs(float(this->line - line));
 	float columnMovement = abs(float(this->column - column));
 
-	if (this->line == line && this->column == column)
+	if (this->line == line && this->column == column) {
 		return false;
+	}
+		
+	flag = MOVED_TWO_BLOCKS(lineMovement) && MOVED_ONE_BLOCK(columnMovement);
 
-	if (MOVED_TWO_BLOCKS(lineMovement) && MOVED_ONE_BLOCK(columnMovement))
-	{
-		flag = true;
-	}
-	else if (MOVED_TWO_BLOCKS(columnMovement) && MOVED_ONE_BLOCK(lineMovement))
-	{
-		flag = true;
-	}
-	else
-	{
-		flag = false;
+	if (!flag) {
+		flag = MOVED_TWO_BLOCKS(columnMovement) && MOVED_ONE_BLOCK(lineMovement);
 	}
 
 	return flag;
