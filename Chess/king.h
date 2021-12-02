@@ -3,8 +3,8 @@
 
 #include "piece.h"
 
-#define TWO 2
-#define ONE 1
+#define TWO_BLOCKS 2
+#define ONE_BLOCK 1
 
 class Piece;
 class Board;

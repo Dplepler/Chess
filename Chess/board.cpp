@@ -412,50 +412,50 @@ void Board::checkHorse(bool color, std::vector<Piece*>& pieces)
 
 	/* Check all options for a horse threatening the king */
 
-	if ((piece = this->getPiece(this->kings[color]->getLine() + TWO, this->kings[color]->getColumn() + ONE)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
+	if ((piece = this->getPiece(this->kings[color]->getLine() + TWO_BLOCKS, this->kings[color]->getColumn() + ONE_BLOCK)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
 	{
 		this->kings[color]->setCheck(true);
 		pieces.push_back(piece);
 	}
 		
 
-	if ((piece = this->getPiece(this->kings[color]->getLine() - TWO, this->kings[color]->getColumn() - ONE)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
+	if ((piece = this->getPiece(this->kings[color]->getLine() - TWO_BLOCKS, this->kings[color]->getColumn() - ONE_BLOCK)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
 	{
 		this->kings[color]->setCheck(true);
 		pieces.push_back(piece);
 	}
 
-	if ((piece = this->getPiece(this->kings[color]->getLine() - TWO, this->kings[color]->getColumn() + ONE)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
+	if ((piece = this->getPiece(this->kings[color]->getLine() - TWO_BLOCKS, this->kings[color]->getColumn() + ONE_BLOCK)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
 	{
 		this->kings[color]->setCheck(true);
 		pieces.push_back(piece);
 	}
 
-	if ((piece = this->getPiece(this->kings[color]->getLine() + TWO, this->kings[color]->getColumn() - ONE)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
+	if ((piece = this->getPiece(this->kings[color]->getLine() + TWO_BLOCKS, this->kings[color]->getColumn() - ONE_BLOCK)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
 	{
 		this->kings[color]->setCheck(true);
 		pieces.push_back(piece);
 	}
 
-	if ((piece = this->getPiece(this->kings[color]->getLine() + ONE, this->kings[color]->getColumn() + TWO)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
+	if ((piece = this->getPiece(this->kings[color]->getLine() + ONE_BLOCK, this->kings[color]->getColumn() + TWO_BLOCKS)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
 	{
 		this->kings[color]->setCheck(true);
 		pieces.push_back(piece);
 	}
 
-	if ((piece = this->getPiece(this->kings[color]->getLine() - ONE, this->kings[color]->getColumn() - TWO)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
+	if ((piece = this->getPiece(this->kings[color]->getLine() - ONE_BLOCK, this->kings[color]->getColumn() - TWO_BLOCKS)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
 	{
 		this->kings[color]->setCheck(true);
 		pieces.push_back(piece);
 	}
 
-	if ((piece = this->getPiece(this->kings[color]->getLine() - ONE, this->kings[color]->getColumn() + TWO)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
+	if ((piece = this->getPiece(this->kings[color]->getLine() - ONE_BLOCK, this->kings[color]->getColumn() + TWO_BLOCKS)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
 	{
 		this->kings[color]->setCheck(true);
 		pieces.push_back(piece);
 	}
 
-	if ((piece = this->getPiece(this->kings[color]->getLine() + ONE, this->kings[color]->getColumn() - TWO)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
+	if ((piece = this->getPiece(this->kings[color]->getLine() + ONE_BLOCK, this->kings[color]->getColumn() - TWO_BLOCKS)) && piece->getColor() != color && piece->id == ID::ID_KNIGHT)
 	{
 		this->kings[color]->setCheck(true);
 		pieces.push_back(piece);

@@ -15,11 +15,11 @@ bool Knight::checkMove(int line, int column, Board* board)
 	if (this->line == line && this->column == column)
 		return false;
 
-	if (lineMovement == TWO && columnMovement == 1.f)
+	if (MOVED_TWO_BLOCKS(lineMovement) && MOVED_ONE_BLOCK(columnMovement))
 	{
 		flag = true;
 	}
-	else if (columnMovement == TWO && lineMovement == 1.f)
+	else if (MOVED_TWO_BLOCKS(columnMovement) && MOVED_ONE_BLOCK(lineMovement))
 	{
 		flag = true;
 	}

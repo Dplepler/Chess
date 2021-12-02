@@ -10,7 +10,8 @@
 
 #define WHITE 0
 #define BLACK 1
-#define TWO 2.f
+#define MOVED_ONE_BLOCK(movement) (movement == 1.f)
+#define MOVED_TWO_BLOCKS(movement) (movement == 2.f)
 
 class Board;
 class Rook;
