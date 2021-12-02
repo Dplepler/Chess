@@ -87,12 +87,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WSUSINGDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(WXWIN)\include; $(WXWIN)\include\msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>c:\wx\include; c:\wx\include\msvc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>c:\wx\lib\vc_lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -102,12 +102,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(WXWIN)\include; $(WXWIN)\include\msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>wx\include;wx\include\msvc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>wx\lib\vc_lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -118,14 +118,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(WXWIN)\include; $(WXWIN)\include\msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>c:\wx\include; c:\wx\include\msvc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>c:\wx\lib\vc_lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -137,14 +137,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(WXWIN)\include; $(WXWIN)\include\msvc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>wx\include;wx\include\msvc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>wx\lib\vc_lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
