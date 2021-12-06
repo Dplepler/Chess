@@ -17,8 +17,8 @@ class cApp : public wxApp
 {
 
 public:
-	cApp();
-	~cApp();
+	cApp() = default;
+	~cApp() = default;
 
 	virtual bool OnInit();
 

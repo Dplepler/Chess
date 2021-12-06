@@ -107,8 +107,6 @@ Board::Board(Play* play)
 	}
 }
 
-Board::~Board() {}
-
 std::vector<std::vector<Piece*>> Board::getBoard()
 {
 	return this->board;

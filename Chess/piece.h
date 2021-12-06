@@ -30,6 +30,7 @@ public:
 	ID id;
 
 	Piece(int line, int column, bool color, wxBitmap* image);
+	virtual ~Piece() = default;
 
 	int getLine() const;
 	int getColumn() const;

@@ -1,11 +1,6 @@
 #include "play.h"
 
-Play::Play()
-{
-	this->turn = WHITE;
-	this->selectOrMove = SELECT;
-	this->gameOver = false;
-}
+Play::Play() : turn(WHITE), selectOrMove(SELECT), gameOver(false) { }
 
 bool Play::isSelectOrMove() const
 {

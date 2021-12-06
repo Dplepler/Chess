@@ -17,7 +17,7 @@ class Play
 public:
 
 	Play();
-	~Play();
+	~Play() = default;
 
 	bool gameOver;
 

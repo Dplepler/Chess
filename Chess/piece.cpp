@@ -1,16 +1,7 @@
 #include "piece.h"
 
-Piece::Piece(int line, int column, bool color, wxBitmap* image)
-{
-	this->line = line;
-	this->column = column;
-
-	this->id = ID::ID_EMPTY;
-	this->color = color;
-
-	this->image = image;
-
-}
+Piece::Piece(int line, int column, bool color, wxBitmap* image) 
+	: line(line), column(column), id(ID::ID_EMPTY), color(color), image(image) { }
 
 int Piece::getLine() const
 {

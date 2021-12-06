@@ -33,7 +33,7 @@ public:
 
 	// C'tor
 	Board(Play* play);
-	~Board();
+	~Board() = default;
 
 	std::vector<std::vector<Piece*>> getBoard();
 

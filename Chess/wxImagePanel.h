@@ -16,6 +16,7 @@ class wxImagePanel : public wxPanel
 public:    
 
     wxImagePanel(wxFrame* parent, Board* board, Play* play);
+    ~wxImagePanel() = default;
     int searchImage(wxBitmap* img) const;
 
     void addImage(wxBitmap* img, wxPoint coord);

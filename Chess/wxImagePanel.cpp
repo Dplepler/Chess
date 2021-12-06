@@ -6,12 +6,8 @@ BEGIN_EVENT_TABLE(wxImagePanel, wxPanel)
 END_EVENT_TABLE()
 
 wxImagePanel::wxImagePanel(wxFrame* parent, Board* board, Play* play) :
-    wxPanel(parent) 
-{
-    this->window = parent;
-    this->board = board;
-    this->play = play;
-}
+    wxPanel(parent), window(parent), board(board), play(play) { }
+
 
 /*
  * Called by the system of by wxWidgets when the panel needs
