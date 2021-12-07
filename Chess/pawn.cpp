@@ -21,7 +21,7 @@ bool Pawn::checkMove(int line, int column, Board* board)
 
 	// For movements that skip two lines, check that the pawn has not moved yet, and also check that the player doesn't try
 	// to move to the sides
-	if (MOVED_TWO_BLOCKS(lineMovement) && !columnMovement)
+	if (movedTwoBlocks(lineMovement) && !columnMovement)
 	{
 		flag = !collidingPiece && this->column == column && (this->color == WHITE && this->line == WHITE_PAWN_POS) || (this->color == BLACK && this->line == BLACK_PAWN_POS);
 	}

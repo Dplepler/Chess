@@ -16,10 +16,10 @@ bool Knight::checkMove(int line, int column, Board* board)
 		return false;
 	}
 		
-	flag = MOVED_TWO_BLOCKS(lineMovement) && MOVED_ONE_BLOCK(columnMovement);
+	flag = movedTwoBlocks(lineMovement) && movedOneBlock(columnMovement);
 
 	if (!flag) {
-		flag = MOVED_TWO_BLOCKS(columnMovement) && MOVED_ONE_BLOCK(lineMovement);
+		flag = movedTwoBlocks(columnMovement) && movedOneBlock(lineMovement);
 	}
 
 	return flag;

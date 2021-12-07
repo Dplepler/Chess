@@ -12,7 +12,7 @@ class Bishop: public Piece
 public:
 	// C'tor
 	Bishop(int line, int column, bool color, wxBitmap* image);
-	~Bishop()
+	~Bishop() = default;
 
 
 private:

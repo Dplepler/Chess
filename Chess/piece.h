@@ -10,8 +10,9 @@
 
 #define WHITE 0
 #define BLACK 1
-#define MOVED_ONE_BLOCK(movement) (movement == 1.f)
-#define MOVED_TWO_BLOCKS(movement) (movement == 2.f)
+
+auto movedOneBlock = [](double movement) { return movement == 1.f; };
+auto movedTwoBlocks = [](double movement) { return movement == 2.f; };
 
 class Board;
 class Rook;
