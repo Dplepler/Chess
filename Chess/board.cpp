@@ -290,7 +290,6 @@ bool Board::checkMate(bool color)
 	return flag;
 }
 
-// TODO: this function should check which pieces (of a certain color) can go to a certain location
 std::vector<Piece*> Board::validDestPieces(wxPoint dst, bool color)
 {
 	unsigned int i = 0;
