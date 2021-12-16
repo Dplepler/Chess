@@ -162,7 +162,6 @@ std::vector<Piece*> Board::checkCheck(bool color)
 	return pieces;
 }
 
-// TODO: CLEAN THIS SHIT MORE
 bool Board::checkMate(bool color)
 {
 	bool flag = true;
